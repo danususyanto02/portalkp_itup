@@ -21,6 +21,14 @@ Route::get('/logintest', function () {
     return view('login');
 });
 
+Route::get('dashboardmhw', function () {
+    return view('dashboardmahasiswa/dashboard');
+});
+
+Route::get('jadwalkp', function () {
+    return view('dashboardmahasiswa/jadwalkp');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
