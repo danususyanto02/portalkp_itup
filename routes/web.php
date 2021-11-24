@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardStaffController;
+use App\Http\Controllers\JadwalKpController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,22 +20,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/logintest', function () {
-    return view('login');
-});
-
-Route::get('/dashboards', function () {
-    return view('dashboardstaff/dashboard');
-});
-Route::get('/jadwal-kp', function () {
-    return view('dashboardstaff/jadwalkp');
-});
-Route::get('/berita', function () {
-    return view('dashboardstaff/berita');
-});
+// Route::get('/logintest', function () {
+//     return view('login');
+// });
 
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::get('/berita', function () {
+//     return view('dashboardstaff/berita');
+// });
+
+
+Route::prefix('dashboard')
+    ->middleware(['auth:sanctum','verified'])
+    ->group(function() {
+        Route::get('/', [DashboardStaffController::class, 'index']);
+        Route::resource('jadwalkp',JadwalKpController::class); 
+     
+    });

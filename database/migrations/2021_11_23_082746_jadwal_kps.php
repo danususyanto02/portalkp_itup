@@ -13,10 +13,11 @@ class Jadwalkp extends Migration
      */
     public function up()
     {
-        Schema::create('jadwalkp', function (Blueprint $table) {
+        Schema::create('jadwal_kps', function (Blueprint $table) {
             $table->id();
             $table->string('kegiatan');
-            $table->date('tanggal');
+            $table->date('daritanggal');
+            $table->date('sampaitanggal');
             $table->rememberToken();
             $table->timestamps();
         });
