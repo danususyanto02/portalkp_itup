@@ -21,6 +21,18 @@ Route::get('/logintest', function () {
     return view('login');
 });
 
+Route::get('/dashboards', function () {
+    return view('dashboardstaff/dashboard');
+});
+Route::get('/jadwal-kp', function () {
+    return view('dashboardstaff/jadwalkp');
+});
+Route::get('/berita', function () {
+    return view('dashboardstaff/berita');
+});
+
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
