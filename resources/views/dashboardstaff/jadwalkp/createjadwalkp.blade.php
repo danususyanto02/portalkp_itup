@@ -1,4 +1,4 @@
-@extends('dashboardstaff/layoutadmin/main')
+@extends('dashboardstaff.layoutadmin.main')
 @section('content')
 <h1>h1. Bootstrap heading</h1>
 <h2>h2. Bootstrap heading</h2>
