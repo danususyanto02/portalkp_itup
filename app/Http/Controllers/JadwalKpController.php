@@ -30,7 +30,7 @@ class JadwalKpController extends Controller
     public function destroy(JadwalKp $jadwalkp)
     {
         $jadwalkp->delete();
-        return redirect()->route('jadwalkp.index');
+        return redirect()->back();
     }
 
 }
