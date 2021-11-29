@@ -22,15 +22,15 @@ Route::get('/logintest', function () {
 });
 
 Route::get('dashboardmhw', function () {
-    return view('dashboardmahasiswa/dashboard');
+    return view('dashboardmahasiswa/dashboard/dashboard');
 });
 
 Route::get('jadwalkp', function () {
-    return view('dashboardmahasiswa/jadwalkp');
+    return view('dashboardmahasiswa/jadwalkp/jadwalkp');
 });
 
 Route::get('profil', function () {
-    return view('dashboardmahasiswa/profil');
+    return view('dashboardmahasiswa/profil/profil');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
