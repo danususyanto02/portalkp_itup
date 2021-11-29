@@ -49,4 +49,22 @@ Route::prefix('dashboard')
         // Route::post('/index-video', [FileController::class, 'destroy_video']);
         // Route::get('/upload-video', [FileController::class, 'create']);
 
+
+Route::get('dashboardmhw', function () {
+    return view('dashboardmahasiswa/dashboard');
+});
+
+Route::get('jadwalkp', function () {
+    return view('dashboardmahasiswa/jadwalkp');
+});
+
+Route::get('profil', function () {
+    return view('dashboardmahasiswa/profil');
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+=======
     });
+
