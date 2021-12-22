@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Video;
+use App\Models\profil;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
-class VideoController extends Controller
+class profilController extends Controller
 {
-  /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $video=Video::all();
-        return view('dashboardstaff.file.crudvideo.indexvideo', compact('video'), );
+        $profil = profil::paginate(5);
+        return view('dashboardmahasiswa.profil.indexprofil',
+        [
+            'profil' => $profil
+        ]);
     }
-
-    public function test()
-    {
-       $dadawd = 'asdasd' ;}
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +28,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return view('dashboardstaff.file.video');
+        return view("dashboardmahasiswa.profil.profil");
     }
 
     /**
@@ -41,16 +39,11 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        $video=new Video;
-        $video->judul=$request->judul;
-        if($request->file('video')){
-            $file = $request->file('video');
-            $nama_file = time().str_replace(" ", "", $file->getClientOriginalName());
-            $file->move('storage/file', $nama_file);
-            $video->video = $nama_file;
-        }
-        $video->save();
-        return redirect('/dashboard/video');   
+        $profil=new profil;
+        $profil->nama=$request->nama;
+        $profil->npm=$request->npm;
+        $profil->save();
+        return redirect()->back(); 
     }
 
     /**
@@ -61,17 +54,9 @@ class VideoController extends Controller
      */
     public function show($id)
     {
-        $data=Video::find($id);
-        return view('dashboardstaff.file.detail', compact('data'));
+        $profil=profil::find($id);
+        return view("dashboardmahasiswa.profil.index");
     }
-
-    public function download(Request $request, $video)
-    { 
-        return response()->download(public_path('storage/file'.$video));
-     
-    }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -102,9 +87,8 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy($id)
     {
-        $video->delete();
-        return redirect()->back();
+        //
     }
 }

@@ -1,5 +1,9 @@
 @extends('dashboardstaff.layoutadmin.main')
 @section('content')
+@if (auth()->user()->role_id==2)
+    
+  
+
 <div class="container-fluid py-4">
     <div class="container-fluid py-4">
         <div class="row">
@@ -42,22 +46,18 @@
                             <iframe class="border-radius-lg" width="426" height="240" src="{{url('storage/file/'.$data->video)}}" allowfullscreen></iframe>
                         </td>
                         <td class="align-middle text-center">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
-                          &nbsp;
-                          &nbsp;
-                          <a  class="text-secondary font-weight-bold text-xs text-danger" data-toggle="tooltip" data-original-title="Delete User" href="{{route('video.destroy',$data->id)}}" onclick="event.preventDefault();
-                            document.getElementById('delete').submit();">
-                            
-                              {!! method_field('DELETE') . csrf_field()!!}
-  
-                            Delete
-                            <form id="delete" action="{{route('video.destroy',$data->id)}}" method="post">  {!! method_field('delete') . csrf_field()!!}
-                            </form>
-                            </a>
+                          <form method="post" action=""> 
+                            <button type="submit" class="btn  btn-sm">edit</button>
+                        </form>
+                        <form method="post" action="{{route('video.destroy',$data->id)}}">
+                          @method('delete')
+                          @csrf
+                          <button type="submit" class="btn  btn-sm">Delete</button>
                         </td>
+                        {{-- kalo mau buat fitur download harus sesuai, misalkan video uploadnya harus berjenis file video, kalo excel harus upload excel --}}
+                        <a class="download" href="{{url('storage/file/'.$data->video)}}">DOWNLOAD</a>
                       </tr>
+                      
                       @endforeach
                     </tbody>
                   </table>
@@ -68,4 +68,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

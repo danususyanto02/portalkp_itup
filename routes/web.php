@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\dashboard\ProfileDosenController;
+use App\Http\Controllers\dashboard\ProfileMahasiswaController;
+use App\Http\Controllers\Dashboardmhw;
 use App\Http\Controllers\DashboardStaffController;
 
 use App\Http\Controllers\JadwalKpController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +25,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/jadwalkp', function () {
+    return view('dashboardmahasiswa.jadwalkp');
+});
+
 
 // Route::get('/logintest', function () {
 //     return view('login');
@@ -41,30 +50,39 @@ Route::get('/', function () {
 Route::prefix('dashboard')
     ->middleware(['auth:sanctum','verified'])
     ->group(function() {
+
+        Route::group(['middleware' => 'role:dosen', 'prefix' => 'dosen', 'as' => 'dosen.'], function() {
+            Route::resource('lessons', VideoController::class);
+        });
+       
         Route::get('/', [DashboardStaffController::class, 'index']);
+        
+        
         Route::resource('jadwalkp',JadwalKpController::class); 
+    
+     
+        Route::resource('profile-mhw', ProfileMahasiswaController::class);
+        Route::resource('profile-dosen', ProfileDosenController::class );
+
         //Video
-        Route::resource('video',VideoController::class); 
+        // Route::resource('video',VideoController::class); 
+        // Route::get('download/{id}', [VideoController::class, 'download'])->name('download');
+
+
+
+        // Route::get('dashboardstaff.file.crudvideo.indexvideo', [VideoController::class, 'download'])
+        // ->name('download');
+
         // Route::get('/index-video', [FileController::class, 'index']);
         // Route::post('/index-video', [FileController::class, 'destroy_video']);
         // Route::get('/upload-video', [FileController::class, 'create']);
-
-
-Route::get('dashboardmhw', function () {
-    return view('dashboardmahasiswa/dashboard/dashboard');
-});
-
-Route::get('jadwalkp', function () {
-    return view('dashboardmahasiswa/jadwalkp/jadwalkp');
-});
-
-Route::get('profil', function () {
-    return view('dashboardmahasiswa/profil/profil');
-});
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-=======
     });
+
+    Route::prefix('dashboard')
+    ->middleware(['auth:sanctum','verified'])
+    ->group(function() {
+        Route::get('/', [Dashboardmhw::class, 'index']);
+
+    });
+
 
