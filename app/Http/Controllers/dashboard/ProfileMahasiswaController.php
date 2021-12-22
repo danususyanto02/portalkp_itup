@@ -1,27 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\dashboard;
 
-use App\Models\Video;
+use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\Profile\UpdateDetailMahasiswaRequest;
+use App\Http\Requests\Dashboard\Profile\UpdateProfileRequest;
+use App\Models\BimbinganKp;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
-class VideoController extends Controller
+use App\Models\User;
+use App\Models\DetailMahasiswa;
+
+
+class ProfileMahasiswaController extends Controller
 {
-  /**
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $video=Video::all();
-        return view('dashboardstaff.file.crudvideo.indexvideo', compact('video'), );
+        $user = User::where('id', Auth::user()->id)->first();
+        $bimbingankp = BimbinganKp::where('mahasiswa_id', $user->detail_mahasiswa->id)->get();
+        return view('dashboardmahasiswa.profile', compact('user','bimbingankp'));
     }
-
-    public function test()
-    {
-       $dadawd = 'asdasd' ;}
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +41,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return view('dashboardstaff.file.video');
+        //
     }
 
     /**
@@ -41,16 +52,7 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        $video=new Video;
-        $video->judul=$request->judul;
-        if($request->file('video')){
-            $file = $request->file('video');
-            $nama_file = time().str_replace(" ", "", $file->getClientOriginalName());
-            $file->move('storage/file', $nama_file);
-            $video->video = $nama_file;
-        }
-        $video->save();
-        return redirect('/dashboard/video');   
+        //
     }
 
     /**
@@ -61,17 +63,8 @@ class VideoController extends Controller
      */
     public function show($id)
     {
-        $data=Video::find($id);
-        return view('dashboardstaff.file.detail', compact('data'));
+        //
     }
-
-    public function download(Request $request, $video)
-    { 
-        return response()->download(public_path('storage/file'.$video));
-     
-    }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -91,9 +84,9 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProfileRequest $request_profile, DetailMahasiswa $request_detail_mahasiswa)
     {
-        //
+
     }
 
     /**
@@ -102,9 +95,8 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy($id)
     {
-        $video->delete();
-        return redirect()->back();
+        //
     }
 }

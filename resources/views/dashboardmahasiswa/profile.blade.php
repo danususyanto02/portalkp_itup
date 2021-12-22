@@ -339,8 +339,34 @@
           </nav>
 <!-- end nav/sidenave -->
 <div class="container-fluid">
-<form>
-    <div class="form-group">
+<form action="{{ route('profile-mhw.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+  
+  @method('PUT')
+  @csrf
+
+</div>
+<div class="md:col-span-6 lg:col-span-3">
+  <label for="role" class="block mb-3 font-medium text-gray-700 text-md">nomor_induk</label>
+
+  <input placeholder="nomor induk" type="text" name="nomor_induk" id="nomor_induk" autocomplete="nomor_induk" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" value="{{ $user->nomor_induk ?? '' }}" required>
+</div>
+  <div class="md:col-span-6 lg:col-span-3">
+    <label for="role" class="block mb-3 font-medium text-gray-700 text-md">Role</label>
+
+    <input placeholder="your alamat" type="text" name="alamat" id="alamat" autocomplete="alamat" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" value="{{ $user->detail_mahasiswa->alamat ?? '' }}" required>
+
+    <div class="md:col-span-6 lg:col-span-3">
+      <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Full Name</label>
+
+      <input placeholder="your name" type="text" name="name" id="name" autocomplete="name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" value="{{ $user->name ?? '' }}" required>
+  </div>
+  <div class="md:col-span-6 lg:col-span-3">
+    <label for="email" class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
+
+    <input placeholder="your email" type="email" name="email" id="email" autocomplete="email" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" value="{{ $user->email ?? '' }}" required>
+
+</div>
+    {{-- <div class="form-group">
         <label for="nama" class="form-control-label">Nama</label>
         <input class="form-control" type="text" value="nama" id="nama">
     </div>
@@ -351,8 +377,8 @@
     <div class="form-group">
         <label for="email" class="form-control-label">Email</label>
         <input class="form-control" type="email" value="email" id="email">
-    </div>
-    <div class="form-group">
+    </div> --}}
+    {{-- <div class="form-group">
         <label for="alamat" class="form-control-label">Alamat</label>
         <input class="form-control" type="url" value="alamat" id="alamat">
     </div>
@@ -392,7 +418,12 @@
         <option>Desti Fitriati, S.Kom, M.Kom</option>
         <option>Gregorius Hendita A.K., S.Si, M.Cs</option>
       </select>
-    </div>
+    </div> --}}
+    <div class="px-4 py-3 text-right sm:px-6">
+      <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" onclick="return confirm('Are you sure want to submit this data ?')">
+          Save Changes
+      </button>
+  </div>
 </form>
 </div>
 <footer class="footer pt-3  ">
