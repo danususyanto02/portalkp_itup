@@ -14,7 +14,9 @@ class ForeignkeyDetailMahasiswaTable extends Migration
     public function up()
     {
         Schema::table('detail_mahasiswa', function (Blueprint $table) {
+
             $table->foreign('users_id','fk_detailmahasiswa_to_users')->references('id')
+
             ->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
@@ -27,7 +29,9 @@ class ForeignkeyDetailMahasiswaTable extends Migration
     public function down()
     {
         Schema::table('detail_mahasiswasd',function(Blueprint $table){
+
             $table->dropForeign('fk_detailmahasiswa_to_users');
+
         });
     }
 }

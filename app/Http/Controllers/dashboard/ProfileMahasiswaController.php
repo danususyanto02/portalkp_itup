@@ -86,6 +86,7 @@ class ProfileMahasiswaController extends Controller
      */
     public function update(UpdateProfileRequest $request_profile, DetailMahasiswa $request_detail_mahasiswa)
     {
+
         $data_profile = $request_profile->all();
         $data_detail_user = $request_detail_mahasiswa->all();
 
@@ -107,6 +108,7 @@ class ProfileMahasiswaController extends Controller
 
 
         return back();
+
     }
 
     /**

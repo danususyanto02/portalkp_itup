@@ -65,7 +65,11 @@ class User extends Authenticatable
 
     
     public function detail_mahasiswa(){
+
         return $this->hasOne('App\Models\DetailMahasiswa', 'users_id');
+
+
+
     }
 
     public function detail_dosen(){

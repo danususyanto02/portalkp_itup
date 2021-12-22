@@ -1,5 +1,8 @@
+
 @extends('dashboardmahasiswa.layout.main')
 @section('content')
+
+
 <div class="container-fluid">
 <form action="{{ route('profile-mhw.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
   
@@ -7,6 +10,7 @@
   @csrf
 
 </div>
+
 <div class="form-group">
   <label for="nomor_induk" class="form-control-label">NPM</label>
 
@@ -46,6 +50,7 @@
 <div class="form-group">
   <label for="tanggal lahir" class="form-control-label">Tanggal Lahir</label>
   <input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" autocomplete="tanggal_lahir" placeholder="tanggal_lahir" value="{{ $user->detail_mahasiswa->tanggal_lahir ?? '' }}" required>
+
 </div>
     {{-- <div class="form-group">
         <label for="nama" class="form-control-label">Nama</label>
@@ -101,10 +106,13 @@
       </select>
     </div> --}}
     <div class="px-4 py-3 text-right sm:px-6">
+
       <button type="submit" class="btn bg-gradient-secondary" onclick="return confirm('Are you sure want to submit this data ?')">
+
           Save Changes
       </button>
   </div>
 </form>
 </div>
 @endsection
+
