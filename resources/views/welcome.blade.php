@@ -55,7 +55,7 @@
                     </a>
                     
                     @else
-                    <a href="{{ url('login') }}" class="text-sm text-white-700 dark:text-white-500">
+                    <a href="{{ url('login') }}" class="text-sm text-white-700 text-center text-sm dark:text-white-500">
                             <button type="button" class="btn btn-secondary">Log in</button>
                     </a>
                     
@@ -65,9 +65,7 @@
                 </div>
                     </div>
                 </div>
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </div>
+
 
                 </div>
             </div>

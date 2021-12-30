@@ -1,4 +1,4 @@
-@extends('dashboardbackend.layoutadmin.main')
+@extends('layout.main')
 @section('content')
 <div class="container-fluid py-4">
     <div class="container-fluid py-4">

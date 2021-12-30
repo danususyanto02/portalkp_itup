@@ -1,4 +1,4 @@
-@extends('dashboardbackend.layoutadmin.main')
+@extends('layout.main')
 @section('content')
 <form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
     @csrf

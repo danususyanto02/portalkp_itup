@@ -19,7 +19,8 @@ class ProfilePejabatprodiController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::where('id', Auth::user()->id)->first();
+        return view('dashboardbackend.profile', compact('user'));
     }
 
     /**

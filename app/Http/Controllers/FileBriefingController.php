@@ -17,6 +17,7 @@ class FileBriefingController extends Controller
         //
         $filebriefing=FileBriefing::all();
         return view('dashboardbackend.file.filebriefing.index', compact('filebriefing'), );
+        
     }
 
     /**

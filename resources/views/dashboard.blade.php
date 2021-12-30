@@ -27,12 +27,23 @@
             <div class="row">
               <div class="col-lg-6">
                 <div class="d-flex flex-column h-100">
-                  <h5 class="font-weight-bolder">Jadwal KP</h5>
-                  <p>Informasi tentang jadwal kegiatan Kerja Praktik</p>
-                  <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="{{url('/jadwalkp')}}">
-                    Selengkapnya
-                    <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                  </a>
+                  <h5 class="font-weight-bolder">Jumlah Bimbingan Dosen</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Dosen</th>
+                        <th>Jumlah Mahasiswa Bimbingan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($list as $item )
+                        <tr>
+                          <td>{{$item->nama}}</td>
+                          <td>{{$item->dospem_count}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -44,12 +55,23 @@
             <div class="row">
               <div class="col-lg-6">
                 <div class="d-flex flex-column h-100">
-                  <h5 class="font-weight-bolder">Jadwal KP</h5>
-                  <p>Informasi tentang jadwal kegiatan Kerja Praktik</p>
-                  <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="{{url('/jadwalkp')}}">
-                    Selengkapnya
-                    <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                  </a>
+                  <h5 class="font-weight-bolder">Mahasiswa Bimbingan</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Mahasiswa</th>
+                        <th>Dosen Pembimbing</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($mahasiswa as $item )
+                        <tr>
+                          <td>{{$item->alamat}}</td>
+                          <td>{{$item->dosen->nama ?? '' }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

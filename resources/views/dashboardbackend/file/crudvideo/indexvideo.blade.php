@@ -1,4 +1,4 @@
-@extends('dashboardbackend.layoutadmin.main')
+@extends('layout.main')
 @section('content')
 {{-- @if (auth()->user()->role_id==5)
      --}}

@@ -16,6 +16,7 @@ class CreateDetailMahasiswaTable extends Migration
         Schema::create('detail_mahasiswa', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->nullable()->index('fk_detailmahasiswa_to_users'); 
+            $table->string('nama')->nullable();
             $table->string('alamat')->nullable();
             $table->string('no_telpon')->nullable();
             $table->string('jenis_kelamin')->nullable();

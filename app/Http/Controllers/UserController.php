@@ -10,6 +10,7 @@ use App\Models\PejabatProdi;
 use App\Models\StafProdi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,11 +25,18 @@ class UserController extends Controller
         return view('dashboardbackend.user.createuser');
     }
 
+    public function edit($id)
+    {
+        $beritaprodi = User::find($id);
+        return view('dashboardbackend.beritaprodi.editberitaprodi',compact('beritaprodi'));
+    }
+
     public function store(Request $request){
         $user = new User;
+        $user -> nomor_induk = $request->nomor_induk;
         $user -> role_id = $request->role_id;
         $user -> email = $request -> email;
-        $user -> password = bcrypt('rahasia');
+        $user -> password = Hash::make($request['password']);
         $user -> save(); 
 
         if($user['role_id']=='2') {
@@ -64,15 +72,6 @@ class UserController extends Controller
             ]);
             $mahasiswa->save();
        }
-    //insert tabel anggota
-    
-        // $newuser=new User;
-        // $newuser->name=$request->name;
-        // $newuser->email=$request->email;
-        // $newuser->password=$request->password;
-        // $newuser->nomor_induk=$request->nomor_induk;
-        // $newuser->role_id=$request->role_id;
-        // $newuser->save();
         $user = User::orderBy('role_id','DESC')->get();
         return view('dashboardbackend.user.indexuser',compact('user'));
        }
