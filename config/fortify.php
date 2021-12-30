@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'username' => 'email',
+    'nomor_induk' => 'identity',
 
     'email' => 'email',
 

@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\DetailMahasiswa;
 use App\Models\Dosen;
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,30 +32,22 @@ class UserController extends Controller
         $user -> password = bcrypt('rahasia');
         $user -> save(); 
 
-        if($user['role_id']=='1') {
+        if($user['role_id']=='2') {
             $request ->request->add(['users_id' => $user-> id]);
-            $dosen = new Dosen([
+            $pejabatprodi = new PejabatProdi([
                 'users_id' => $user-> id,
                 'nama' => $request -> input ('nama'),
                 'no_telpon' => $request -> input ('no_telpon')
             ]);
-            $dosen->save();
-           }elseif($user['role_id']=='2') {
-            $request ->request->add(['users_id' => $user-> id]);
-            $dosen = new Dosen([
-                'users_id' => $user-> id,
-                'nama' => $request -> input ('nama'),
-                'no_telpon' => $request -> input ('no_telpon')
-            ]);
-            $dosen->save();
+            $pejabatprodi->save();
            }elseif($user['role_id']=='3') {
             $request ->request->add(['users_id' => $user-> id]);
-            $dosen = new Dosen([
+            $stafprodi = new StafProdi([
                 'users_id' => $user-> id,
                 'nama' => $request -> input ('nama'),
                 'no_telpon' => $request -> input ('no_telpon')
             ]);
-            $dosen->save();
+            $stafprodi->save();
            }elseif($user['role_id']=='4') {
             $request ->request->add(['users_id' => $user-> id]);
             $dosen = new Dosen([
@@ -62,7 +56,7 @@ class UserController extends Controller
                 'no_telpon' => $request -> input ('no_telpon')
             ]);
             $dosen->save();
-       }elseif($user['role_id']=='5') {
+            }elseif($user['role_id']=='5') {
             $request ->request->add(['users_id' => $user-> id]);
             $mahasiswa = new DetailMahasiswa([
                 'users_id' => $user-> id,

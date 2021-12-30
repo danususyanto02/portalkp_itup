@@ -4,17 +4,14 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Profile\UpdateProfileRequest;
-use App\Models\StafProdi;
+use App\Models\DetailPejabatProdi;
+use App\Models\PejabatProdi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProfileStafprodiController extends Controller
+class ProfilePejabatprodiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +19,7 @@ class ProfileStafprodiController extends Controller
      */
     public function index()
     {
-        $user = User::where('id', Auth::user()->id)->first();
-        return view('dashboardbackend.profile', compact('user'));
+        //
     }
 
     /**
@@ -76,7 +72,7 @@ class ProfileStafprodiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request_profile, StafProdi $request_detail_dosen)
+    public function update(UpdateProfileRequest $request_profile, PejabatProdi $request_detail_dosen)
     {
         $data_profile = $request_profile->all();
         $data_detail_user = $request_detail_dosen->all();
@@ -90,11 +86,8 @@ class ProfileStafprodiController extends Controller
             'no_telpon'         => request()->input('no_telpon'),
         ];
         // ptoses save to detail user
-        $detail_user = StafProdi::find($user->stafprodi->id);
+        $detail_user = PejabatProdi::find($user->pejabatprodi->id);
         $detail_user->update($data_detail_user);
-
-
-        return back();
     }
 
     /**

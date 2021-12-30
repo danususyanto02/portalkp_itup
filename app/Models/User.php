@@ -73,7 +73,10 @@ class User extends Authenticatable
     }
 
     public function stafprodi(){
-        return $this->hasOne('App\Models\DetailMahasiswa', 'users_id');
+        return $this->hasOne('app\Models\StafProdi', 'users_id');
+    }
+    public function pejabatprodi(){
+        return $this->hasOne('app\Models\PejabatProdi', 'users_id');
     }
 
     //role

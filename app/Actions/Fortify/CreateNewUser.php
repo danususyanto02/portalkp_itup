@@ -5,6 +5,7 @@ use App\Models\DetailMahasiswa;
 use App\Models\DetailPejabatProdi;
 use App\Models\DetailStafProdi;
 use App\Models\Dosen;
+use App\Models\PejabatProdi;
 use App\Models\StafProdi;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'nomor_induk' =>['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'role_id' => ['required']
@@ -46,6 +48,7 @@ class CreateNewUser implements CreatesNewUsers
                 return tap(User::create([
                     'name' => $input['name'],
                     'email' => $input['email'],
+                    'nomor_induk' => $input['nomor_induk'],
                     'password' => Hash::make($input['password']),
                     // 'role_id' => $input ['role_id'],
                 ]));
@@ -56,10 +59,11 @@ class CreateNewUser implements CreatesNewUsers
                 return tap(User::create([
                     'name' => $input['name'],
                     'email' => $input['email'],
+                    'nomor_induk' => $input['nomor_induk'],
                     'password' => Hash::make($input['password']),
                     // 'role_id' => $input ['role_id'],
                 ]), function(User $user){
-                    $PejabatProdi = new DetailPejabatProdi();
+                    $PejabatProdi = new PejabatProdi();
                     $PejabatProdi->users_id = $user->id;
                     $PejabatProdi->nomor_induk = NULL;
                     $PejabatProdi->role_id = NULL;
@@ -72,6 +76,7 @@ class CreateNewUser implements CreatesNewUsers
                 return tap(User::create([
                     'name' => $input['name'],
                     'email' => $input['email'],
+                    'nomor_induk' => $input['nomor_induk'],
                     'password' => Hash::make($input['password']),
                     // 'role_id' => $input ['role_id'],
                 ]), function(User $user){
@@ -86,8 +91,9 @@ class CreateNewUser implements CreatesNewUsers
             return DB::transaction(function () use($input)
             {
                 return tap(User::create([
-                   
-                 
+                    'name' => $input['name'],
+                    'email' => $input['email'],
+                    'nomor_induk' => $input['nomor_induk'],
                     'password' => Hash::make($input['password']),
                     // 'role_id' => $input ['role_id'],
                 ]), function(User $user){
@@ -102,6 +108,7 @@ class CreateNewUser implements CreatesNewUsers
             return DB::transaction(function () use($input)
             {
                 return tap(User::create([
+                    'nomor_induk' => $input['nomor_induk'],
                     'name' => $input['name'],
                     'email' => $input['email'],
                     'password' => Hash::make($input['password']),
