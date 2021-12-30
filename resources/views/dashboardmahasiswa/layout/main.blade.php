@@ -21,7 +21,7 @@
     <link id="pagestyle" href="{{asset('../assets/css/soft-ui-dashboard.css?v=1.0.3')}}" rel="stylesheet" />
   </head>
 
-<body style=" @if (auth()->user()->role_id==5) background-color: rgb(223, 223, 223)" @endif class="g-sidenav-show">
+<body style="background-color: rgb(223, 223, 223)" class="g-sidenav-show">
 
         <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
           <div class="sidenav-header">
@@ -35,7 +35,7 @@
           <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link  {{ (request()->is('dashboardmhw')) ? 'active' : '' }}" href="http://portalkp_itup.test/ {{ url('/dashboardmhw') }}">
+                <a class="nav-link  {{ (request()->is('dashboard')) ? 'active' : '' }}" href="http://portalkp_itup.test/dashboard">
                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Dashboard</title>
@@ -55,7 +55,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link  {{ (request()->is('jadwalkp')) ? 'active' : '' }}" href="http://portalkp_itup.test/jadwalkp {{ url('/jadwalkp') }}">
+                <a class="nav-link  {{ (request()->is('jadwalkp')) ? 'active' : '' }}" href="http://portalkp_itup.test/dashboard/jadwalkp">
                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>office</title>
@@ -75,7 +75,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link  " href="../pages/billing.html">
+                <a class="nav-link  " href="#">
                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>credit-card</title>
@@ -91,10 +91,10 @@
                       </g>
                     </svg>
                   </div>
-                  <span class="nav-link-text ms-1">Billing</span>
+                  <span class="nav-link-text ms-1">Berita</span>
                 </a>
               </li>
-              <li class="nav-item">
+              {{--<li class="nav-item">
                 <a class="nav-link  " href="../pages/virtual-reality.html">
                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -135,12 +135,12 @@
                   </div>
                   <span class="nav-link-text ms-1">RTL</span>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Akun</h6>
               </li>
               <li class="nav-item">
-                <a class="nav-link  " href="http://portalkp_itup.test/profil">
+                <a class="nav-link  " href="http://portalkp_itup.test/dashboard/profile-mhw">
                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>customer-support</title>
@@ -161,7 +161,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link  " href="../pages/sign-in.html {{ url('/masuk') }}">
+                <a class="nav-link  " href="../pages/sign-in.html {{ url('/keluar') }}">
                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>document</title>
@@ -177,9 +177,10 @@
                       </g>
                     </svg>
                   </div>
-                  <span class="nav-link-text ms-1">Masuk</span>
+                  <span class="nav-link-text ms-1">Keluar</span>
                 </a>
               </li>
+              
 
         </aside>
         <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
@@ -203,8 +204,12 @@
                 <ul class="navbar-nav  justify-content-end">
                   <li class="nav-item d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                      <i class="fa fa-user me-sm-1"></i>
-                      <span class="d-sm-inline d-none">Masuk</span>
+                      <i class="fa fa-user me-sm-1" ></i>
+                      <form action="{{ route('profile-mhw.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                      <input placeholder="your name" type="text" name="name" id="name" autocomplete="name" class="form-control" value="{{ $user->name ?? '' }}" disabled="disabled">
+                      </form>
                     </a>
                   </li>
                     </ul>

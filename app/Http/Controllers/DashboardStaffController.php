@@ -9,7 +9,7 @@ class DashboardStaffController extends Controller
 {
     public function index()
     { 
-        return view('dashboardbackend.dashboard');
+        return view('dashboard');
     }
     
 }

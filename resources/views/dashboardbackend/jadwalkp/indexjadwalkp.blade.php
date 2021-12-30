@@ -1,11 +1,13 @@
-@extends('dashboardbackend.layoutadmin.main')
+@extends('layout.main')
 @section('content')
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
+              @if (auth()->user()->role_id!=5)
              <a href="{{ route('jadwalkp.create') }}"> <button type="button" class="btn btn-success " >Buat Jadwal Baru</button></a>
+             @endif
               <h6>Jadwal KP</h6>
               
             </div>
@@ -37,6 +39,8 @@
                       <td class="align-middle text-center text-sm">
                         <h6 class="mb-0 text-sm">{{$jadwal_kps->sampaitanggal}}</h6>
                       </td>
+                      @if (auth()->user()->role_id!=5)
+
                       <td class="align-middle">
                         <a href="{{url('jadwalkp/'.$jadwal_kps->id.'/edit')}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
@@ -52,6 +56,7 @@
                           </form>
                           </a>
                       </td>
+                      @endif
                     </tr>
                     @endforeach
                   </tbody>

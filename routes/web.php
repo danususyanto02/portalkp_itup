@@ -32,13 +32,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dasbor', function () {
+    return view('dashboardmahasiswa.dashboard');
+});
+
 Route::get('/jadwalkp', function () {
     return view('dashboardmahasiswa.jadwalkp');
 });
 
-Route::get('/logincoba', function () {
-    return view('logintest');
+ Route::get('/logincoba', function () {
+     return view('logintest');
 });
+// Route::get('/login', function() {
+//     return abort(404);
+// });
 
 // Route::get('/logintest', function () {
 //     return view('login');
@@ -56,7 +63,7 @@ Route::get('/logincoba', function () {
 // Route::get('/view-video/download/{file}', [FileController::class, 'download']);
 
 Route::group(['middleware'=>'auth'], function(){
-
+    // Route::get('/dashboard', [DashboardStaffController::class, 'index']);
     Route::resource('beritakp',BeritakpController::class);
     Route::resource('jadwalkp',JadwalKpController::class); 
     Route::resource('beritaprodi',BeritaprodiController::class); 
@@ -67,7 +74,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('user',UserController::class); 
 
     Route::group(['middleware' => 'role:super_admin','prefix'=>'admin','as'=>'super_admin.'], function(){
-        Route::get('/', [DashboardStaffController::class, 'index']);
+        // Route::get('/', [DashboardStaffController::class, 'index']);
 
         Route::resource('user',UserController::class); 
         Route::resource('jadwalkp',JadwalKpController::class); 
@@ -79,7 +86,7 @@ Route::group(['middleware'=>'auth'], function(){
     });
 
     Route::group(['middleware' => 'role:pejabat_prodi','prefix'=>'pejabat-prodi','as'=>'pejabat_prodi.'], function(){
-        Route::get('/', [DashboardStaffController::class, 'index']);
+        // Route::get('/', [DashboardStaffController::class, 'index']);
         // Route::resource('profile', ProfileMahasiswaController::class);
         Route::resource('jadwalkp',JadwalKpController::class); 
         Route::resource('video',VideoController::class); 
@@ -89,7 +96,7 @@ Route::group(['middleware'=>'auth'], function(){
     });
 
     Route::group(['middleware' => 'role:staf_prodi','prefix'=>'staf-prodi','as'=>'staf_prodi.'], function(){
-        Route::get('/', [DashboardStaffController::class, 'index']);
+        // Route::get('/', [DashboardStaffController::class, 'index']);
         Route::resource('video',VideoController::class); 
         Route::resource('profile', ProfileStafprodiController::class);
         Route::resource('beritakp',BeritakpController::class);
@@ -99,14 +106,14 @@ Route::group(['middleware'=>'auth'], function(){
     });
 
     Route::group(['middleware' => 'role:dosen','prefix'=>'dosen','as'=>'dosen.'], function(){
-        Route::get('/', [DashboardStaffController::class, 'index']);
+        // Route::get('/', [DashboardStaffController::class, 'index']);
         Route::resource('video',VideoController::class); 
         Route::resource('file',FileController::class); 
         Route::resource('profile', ProfileDosenController::class );
     });
 
     Route::group(['middleware' => 'role:mahasiswa','prefix'=>'mahasiswa','as'=>'mahasiswa.'], function(){
-        Route::get('/', [DashboardStaffController::class, 'index']);
+        // Route::get('/', [DashboardStaffController::class, 'index']);
         Route::resource('video',VideoController::class); 
         Route::resource('profile', ProfileMahasiswaController::class);
         Route::resource('jadwalkp',JadwalKpController::class); 

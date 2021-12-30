@@ -1,13 +1,15 @@
-
-@extends('dashboardmahasiswa.layout.main')
+@extends('layout.main')
 @section('content')
 
 
 <div class="container-fluid">
 <form action="{{ route('mahasiswa.profile.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+  
   @method('PUT')
   @csrf
+
 </div>
+
 <div class="form-group">
   <label for="nomor_induk" class="form-control-label">NPM</label>
 
@@ -20,6 +22,7 @@
   </div>
   <div class="form-group">
     <label for="alamat" class="form-control-label">Alamat</label>
+
     <input placeholder="your alamat" type="text" name="alamat" id="alamat" autocomplete="alamat" class="form-control" value="{{ $user->detail_mahasiswa->alamat ?? '' }}" required>
   </div>
   <div class="form-group">
@@ -46,51 +49,7 @@
 <div class="form-group">
   <label for="tanggal lahir" class="form-control-label">Tanggal Lahir</label>
   <input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" autocomplete="tanggal_lahir" placeholder="tanggal_lahir" value="{{ $user->detail_mahasiswa->tanggal_lahir ?? '' }}" required>
-</div>
-<div class="form-group">
-  <label for="">Dosen Pembimbing</label>
-  <select class="form-control" id="dospem_id"  type="dospem_id" name="dospem_id" id="dospem_id" >
-    @foreach ($dosen as $datadosen)
-    <option value="{{$datadosen->id}}">{{$datadosen['nama']}}</option>
-    {{-- <option value="{{$jadwal_kps['id']}}">{{$jadwal_kps['nama']}} {{ $user->detail_mahasiswa->dospem_id ?? ''}}</option> --}}
-    @endforeach
-  </select>
-</div> 
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>nama dosen</th>
-        <th>jumlah mahasiswa bimbingan</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($list as $item )
-        <tr>
-          <td>{{$item->nama}}</td>
-          <td>{{$item->dospem_count}}</td>
-        </tr>
-        @endforeach
-    </tbody>
-  </table>
-</div>
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>nama mahasiswa</th>
-        <th>dosen Pembimbing</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($mahasiswa as $item )
-        <tr>
-          <td>{{$item->alamat}}</td>
-          <td>{{$item->dosen->nama ?? '' }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-  </table>
+
 </div>
     {{-- <div class="form-group">
         <label for="nama" class="form-control-label">Nama</label>
