@@ -5,8 +5,10 @@ use App\Http\Controllers\BeritaprodiController;
 use App\Http\Controllers\dashboard\ProfileDosenController;
 use App\Http\Controllers\dashboard\ProfileMahasiswaController;
 use App\Http\Controllers\dashboard\ProfileStafprodiController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dashboardmhw;
 use App\Http\Controllers\DashboardStaffController;
+use App\Http\Controllers\FileBriefingController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\JadwalKpController;
 use App\Http\Controllers\ProfileController;
@@ -31,10 +33,12 @@ use Laravel\Jetstream\Role;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('dashboard',DashboardController::class);
+// Route::get('/dashboard', [DashboardController::class, 'dashboard']);
 
-Route::get('/dasbor', function () {
-    return view('dashboardmahasiswa.dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// });
 
 Route::get('/jadwalkp', function () {
     return view('dashboardmahasiswa.jadwalkp');
@@ -68,7 +72,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('jadwalkp',JadwalKpController::class); 
     Route::resource('beritaprodi',BeritaprodiController::class); 
     Route::resource('profile-dosen', ProfileDosenController::class);
-    Route::resource('file',FileController::class); 
+    Route::resource('file',FileController::class);
+    Route::resource('filebriefing',FileBriefingController::class);  
     Route::resource('video',VideoController::class); 
     Route::resource('profile-dosen', ProfileMahasiswaController::class);
     Route::resource('user',UserController::class); 

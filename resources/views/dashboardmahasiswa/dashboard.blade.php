@@ -21,8 +21,7 @@
               </div>
               <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
                 <div class="bg-gradient-primary border-radius-lg h-100">
-                  <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
-                  
+                  <img src="../assets/img/" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                 </div>
               </div>
             </div>
@@ -33,14 +32,14 @@
         <div class="card card-frame">
           <div class="card-body">
             <h5>Download Buku Panduan KP</h5>
-            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Download</a>
+            <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Download</a>
           </div>
         </div>
         <br>
         <div class="card card-frame">
           <div class="card-body">
             <h5>Download Presentasi Briefing KP</h5>
-            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Download</a>
+            <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Download</a>
           </div>
         </div>
       </div>

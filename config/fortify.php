@@ -62,13 +62,13 @@ return [
     |
     */
 
-    // 'home' => RouteServiceProvider::HOME,
+    'home' => RouteServiceProvider::HOME,
 
-    'home' => function () {
-            if (Auth::user()) {
-                return 'dashboard';   
-            }
-    },
+    // 'home' => function () {
+    //         if (Auth::user()) {
+    //             return 'dashboard';   
+    //         }
+    // },
 
     /*
     |--------------------------------------------------------------------------

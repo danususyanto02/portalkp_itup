@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Beritakp;
-use App\Models\User;
+use App\Models\FileBriefing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
-class BeritakpController extends Controller
+class FileBriefingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,9 @@ class BeritakpController extends Controller
      */
     public function index()
     {
-        $beritakp = Beritakp::all();
-        return view('dashboardbackend.beritakp.indexberitakp', compact('beritakp'));
+        //
+        $filebriefing=FileBriefing::all();
+        return view('dashboardbackend.file.filebriefing.index', compact('filebriefing'), );
     }
 
     /**
@@ -28,7 +26,8 @@ class BeritakpController extends Controller
      */
     public function create()
     {
-        return view('dashboardbackend.beritakp.createberitakp');
+        //
+        return view('dashboardbackend.file.filebriefing.create');
     }
 
     /**
@@ -39,12 +38,16 @@ class BeritakpController extends Controller
      */
     public function store(Request $request)
     {
-        $beritakp=new Beritakp;
-        $beritakp->info_berita=$request->info_berita;
-        $beritakp->pengirim=$request->pengirim;
-        $beritakp->users_id=Auth::user()->id;
-        $beritakp->save();
-        return redirect()->route('beritakp.index');
+        $filebriefing=new FileBriefing();
+        $filebriefing->nama=$request->nama;
+        if($request->file('file')){
+            $filebriefingdata = $request->file('file');
+            $nama_file = time().str_replace(" ", "", $filebriefingdata->getClientOriginalName());
+            $filebriefingdata->move('storage/file/briefing', $nama_file);
+            $filebriefing->file = $nama_file;
+        }
+        $filebriefing->save();
+        return redirect()->route('filebriefing.index');
     }
 
     /**
@@ -66,15 +69,8 @@ class BeritakpController extends Controller
      */
     public function edit($id)
     {
-        $berita = Beritakp::find($id);
-        return view('dashboardbackend.beritakp.editberitakp',compact('berita'));
+        //
     }
-
-    public function dashboard(){
-        $beritaprodi = Beritakp::orderBy('created_at','ASC')->get();
-        return view('dashboard',compact('beritaprodi'));
-    }
-
 
     /**
      * Update the specified resource in storage.
@@ -85,11 +81,7 @@ class BeritakpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $beritakp= Beritakp::find($id);
-        $beritakp->info_berita=$request->info_berita;
-        $beritakp->pengirim=$request->pengirim;
-        $beritakp->update();
-        return redirect()->route('beritakp.index');
+        //
     }
 
     /**
@@ -98,9 +90,8 @@ class BeritakpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Beritakp $beritakp)
+    public function destroy($id)
     {
-        $beritakp->delete();
-        return redirect()->back();
+        //
     }
 }

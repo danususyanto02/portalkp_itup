@@ -101,12 +101,13 @@ class ProfileMahasiswaController extends Controller
         $user->update($data_profile);
 
         $data_detail_user = [
-            'no_telpon'     => request()->input('no_telpon'),
+            'nama'           => request()->input('nama'),
+            'no_telpon'      => request()->input('no_telpon'),
             'alamat'         => request()->input('alamat'),
             'jenis_kelamin'  => request()->input('jenis_kelamin'),
             'tempat_lahir'   => request()->input('tempat_lahir'),
             'tanggal_lahir'  => request()->input('tanggal_lahir'),
-            'dospem_id'       => request()->input('dospem_id'),
+            'dospem_id'      => request()->input('dospem_id'),
 
         ];
         // proses save to detail user

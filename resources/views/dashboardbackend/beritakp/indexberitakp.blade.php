@@ -23,7 +23,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($berita as $data => $databerita)
+                    @foreach ($beritakp as $data => $databerita)
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">

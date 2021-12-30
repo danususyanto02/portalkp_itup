@@ -14,6 +14,7 @@ class DetailMahasiswa extends Model
     protected $fillable = [
 
         'users_id',
+        'nama',
         'alamat',
         'no_telpon',
         'jenis_kelamin',

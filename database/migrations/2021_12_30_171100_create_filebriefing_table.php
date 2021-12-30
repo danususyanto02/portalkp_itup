@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBeritaProdiTable extends Migration
+class CreateFilebriefingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBeritaProdiTable extends Migration
      */
     public function up()
     {
-        Schema::create('beritaprodi', function (Blueprint $table) {
+        Schema::create('filebriefing', function (Blueprint $table) {
             $table->id();
-            $table->longText('info_berita')->nullable();
-            $table->string('pengirim')->nullable();
-            $table->foreignId('users_id')->nullable()->index('fk_beritaprodi_to_user'); 
+            $table->string('nama')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateBeritaProdiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beritaprodi');
+        Schema::dropIfExists('filebriefing');
     }
 }

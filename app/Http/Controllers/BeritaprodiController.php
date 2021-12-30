@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beritakp;
 use App\Models\Beritaprodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,7 @@ class BeritaprodiController extends Controller
     {
         $beritaprodi=new beritaprodi;
         $beritaprodi->info_berita=$request->info_berita;
+        $beritaprodi->pengirim=$request->pengirim;
         $beritaprodi->users_id=Auth::user()->id;
         $beritaprodi->save();
         return redirect()->route('beritaprodi.index');
@@ -53,6 +55,12 @@ class BeritaprodiController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function dashboard(){
+        $beritakp = Beritakp::orderBy('created_at','ASC')->get();
+        $beritaprodi = Beritaprodi::orderBy('created_at','ASC')->get();
+        return view('dashboard',compact('beritaprodi','beritakp'));
     }
 
     /**
@@ -78,6 +86,7 @@ class BeritaprodiController extends Controller
     {
         $beritaprodi= Beritaprodi::find($id);
         $beritaprodi->info_berita=$request->info_berita;
+        $beritaprodi->pengirim=$request->pengirim;
         $beritaprodi->update();
         return redirect()->route('beritaprodi.index');
     }

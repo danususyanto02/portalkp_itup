@@ -11,14 +11,16 @@
 </div>
 
 <div class="form-group">
-  <label for="nomor_induk" class="form-control-label">NPM</label>
-
-  <input placeholder="nomor induk" type="text" disabled="disabled" name="nomor_induk" id="nomor_induk" autocomplete="nomor_induk" class="form-control" value="{{ $user->nomor_induk ?? '' }}" required>
+<div class="card card-frame">
+  <div class="card-body">
+   <strong>NPM : &nbsp {{ $user->nomor_induk ?? '' }}</strong> 
+  </div>
+</div>
 </div>
 <div class="form-group">
-      <label for="name" class="form-control-label">Nama Lengkap</label>
+      <label for="nama" class="form-control-label">Nama Lengkap</label>
 
-      <input placeholder="your name" type="text" name="name" id="name" autocomplete="name" class="form-control" value="{{ $user->name ?? '' }}" required>
+      <input placeholder="your name" type="text" name="nama" id="nama" autocomplete="nama" class="form-control" value="{{ $user->detail_mahasiswa->nama ?? '' }}" required>
   </div>
   <div class="form-group">
     <label for="alamat" class="form-control-label">Alamat</label>
@@ -49,8 +51,16 @@
 <div class="form-group">
   <label for="tanggal lahir" class="form-control-label">Tanggal Lahir</label>
   <input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" autocomplete="tanggal_lahir" placeholder="tanggal_lahir" value="{{ $user->detail_mahasiswa->tanggal_lahir ?? '' }}" required>
-
 </div>
+<div class="form-group">
+  <label for="">Dosen Pembimbing</label>
+  <select class="form-control" id="dospem_id"  type="dospem_id" name="dospem_id" id="dospem_id" >
+    @foreach ($dosen as $datadosen)
+    <option value="{{$datadosen->id}}">{{$datadosen['nama']}}</option>
+    {{-- <option value="{{$jadwal_kps['id']}}">{{$jadwal_kps['nama']}} {{ $user->detail_mahasiswa->dospem_id ?? ''}}</option> --}}
+    @endforeach
+  </select>
+</div> 
     {{-- <div class="form-group">
         <label for="nama" class="form-control-label">Nama</label>
         <input class="form-control" type="text" value="nama" id="nama">

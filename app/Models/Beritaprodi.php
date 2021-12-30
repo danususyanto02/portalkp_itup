@@ -14,6 +14,7 @@ class Beritaprodi extends Model
     protected $fillable = [
         'users_id',
         'info_berita',
+        'pengirim',
     ];
 
     public function pengirim(){

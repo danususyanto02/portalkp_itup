@@ -20,7 +20,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="../assets/img/up.png">
   <title>
     Dashboard
   </title>
@@ -52,7 +52,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}  " href="{{ url('/dashboard') }}">
+          <a class="nav-link" href="{{ url('/dashboard') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -73,7 +73,7 @@
         </li>
         @if (auth()->user()->role_id==1)
         <li class="nav-item">
-          <a class="nav-link {{ (request()->is('admin/user')) ? 'active' : '' }} " href="user">
+          <a class="nav-link" href="user">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -94,7 +94,7 @@
           @endif
         </li>
         <li class="nav-item">
-          <a class="nav-link " {{ (request()->is('jadwalkp')) ? 'active' : '' }} href="{{url('/jadwalkp')}}">
+          <a class="nav-link " href="{{url('/jadwalkp')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>credit-card</title>
@@ -115,7 +115,7 @@
         </li>
         @if (auth()->user()->role_id==1)
         <li class="nav-item">
-          <a class="nav-link  " {{ (request()->is('berita')) ? 'active' : '' }} href="{{url('/berita')}}">
+          <a class="nav-link  "  href="{{url('/berita')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -139,7 +139,7 @@
 
         @if (auth()->user()->role_id==2)
         <li class="nav-item">
-          <a class="nav-link  " {{ (request()->is('berita')) ? 'active' : '' }} href="{{url('/berita')}}">
+          <a class="nav-link  "  href="{{url('/berita')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -163,7 +163,7 @@
 
         @if (auth()->user()->role_id==3)
         <li class="nav-item">
-          <a class="nav-link  " {{ (request()->is('berita')) ? 'active' : '' }} href="{{url('/berita')}}">
+          <a class="nav-link  "  href="{{url('/berita')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -358,22 +358,6 @@
         </li>
       </ul>
     </div>
-    <div class="sidenav-footer mx-3 ">
-      <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
-        <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
-        <div class="card-body text-start p-3 w-100">
-          <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
-            <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
-          </div>
-          <div class="docs-info">
-            <h6 class="text-white up mb-0">Need help?</h6>
-            <p class="text-xs font-weight-bold">Please check our docs</p>
-            <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard" target="_blank" class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
-          </div>
-        </div>
-      </div>
-      <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-    </div>
   </aside>
 
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
@@ -387,7 +371,7 @@
             <li class="nav-item d-flex align-items-center">
               <a href="" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
+                <span class="d-sm-inline d-none">{{ Auth::user()->detail_mahasiswa->nama }}</span>
               </a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
