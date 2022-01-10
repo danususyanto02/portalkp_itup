@@ -5,6 +5,8 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Profile\UpdateProfileRequest;
 use App\Models\Dosen;
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +29,13 @@ class ProfileDosenController extends Controller
         return view('dashboardbackend.profile', compact('user'));
         // dd($user);
     }
+
+    
+    public function viewdosen(){
+        $dosen = Dosen::all();
+        return view('form.dosen.indexform', compact('dosen'));
+    }
+    
 
     /**
      * Show the form for creating a new resource.

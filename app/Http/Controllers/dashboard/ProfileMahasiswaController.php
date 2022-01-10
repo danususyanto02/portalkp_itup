@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
-
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use App\Models\User;
 use App\Models\DetailMahasiswa;
 use App\Models\Dosen;
@@ -67,9 +68,16 @@ class ProfileMahasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        //
+        $mahasiswa = DetailMahasiswa::orderBy('role_id','DESC')->get();
+        if($request->has('search')){
+            $mahasiswa= DetailMahasiswa::where('nomor_induk','like','%'.$request->search.'%')->get();
+        }else{
+            $mahasiswa = DetailMahasiswa::orderBy('role_id','DESC')->get();
+        }
+        // dd($user);
+        return view ('dashboardbackend.user.indexuser', compact('user'));
     }
 
     /**
@@ -82,6 +90,8 @@ class ProfileMahasiswaController extends Controller
     {
         //
     }
+
+  
 
     /**
      * Update the specified resource in storage.

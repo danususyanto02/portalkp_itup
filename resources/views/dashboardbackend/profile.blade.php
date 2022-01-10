@@ -1,12 +1,11 @@
 
-@extends('dashboardmahasiswa.layout.main')
+@extends('layout.main')
 @section('content')
 
-dibenerin routenya!!
 
 @if (auth()->user()->role_id==2)
 <div class="container-fluid">
-<form action="{{ route('profile-dosen.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('pejabat_prodi.profile.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
   @method('PUT')
   @csrf
   <div class="form-group">
@@ -20,7 +19,7 @@ dibenerin routenya!!
 
 @if (auth()->user()->role_id==3)
 <div class="container-fluid">
-<form action="{{ route('profile-dosen.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('staf_prodi.profile.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
   @method('PUT')
 
   <div class="form-group">
@@ -33,7 +32,7 @@ dibenerin routenya!!
 
 @if (auth()->user()->role_id==4)
 <div class="container-fluid">
-<form action="{{ route('profile-dosen.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('dosen.profile.update', [Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
   @method('PUT')
   @csrf
 

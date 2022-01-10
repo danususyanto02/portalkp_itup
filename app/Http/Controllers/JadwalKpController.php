@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use App\Models\JadwalKp;
 use Illuminate\Http\Request;
 use PDO;
@@ -29,7 +30,8 @@ class JadwalKpController extends Controller
     }
 
     public function update(Request $request, $id){
-        $jadwal = JadwalKp::find($id);
+        $jadwalkp = JadwalKp::find($id);
+        $jadwalkp->update($request->all());   
         return redirect()->route('jadwalkp.index');
     }
 
@@ -39,11 +41,12 @@ class JadwalKpController extends Controller
         $jadwal->daritanggal=$request->daritanggal;
         $jadwal->sampaitanggal=$request->sampaitanggal;
         $jadwal->save();
-        return redirect()->route('jadwalkp.index');
+        return redirect('/jadwalkp');
     }
 
-    public function destroy(JadwalKp $jadwalkp)
+    public function destroy($id)
     {
+        $jadwalkp=JadwalKp::find($id);
         $jadwalkp->delete();
         return redirect()->back();
     }

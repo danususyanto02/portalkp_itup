@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,8 +18,15 @@ class Dosen extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App/Models/User', 'user_id','id');
+        return $this->belongsTo('App\Models\User', 'users_id','id');
     }
+
+    // public function keuser(){
+    //     return $this->hasOne('App\Models/User', 'users_id','id');
+    // }
+
+
+    
 
     //relasi bimbingan kp
     public function dospem(){

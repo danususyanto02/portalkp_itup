@@ -18,7 +18,7 @@ class Beritakp extends Model
     ];
 
     public function pengirim(){
-        return $this->belongsTo('App/Models/User', 'user_id','id');
+        return $this->belongsTo('App/Models/User', 'users_id','id');
     }
     
 }

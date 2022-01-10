@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -73,10 +74,10 @@ class User extends Authenticatable
     }
 
     public function stafprodi(){
-        return $this->hasOne('app\Models\StafProdi', 'users_id');
+        return $this->hasOne('App\Models\StafProdi', 'users_id');
     }
     public function pejabatprodi(){
-        return $this->hasOne('app\Models\PejabatProdi', 'users_id');
+        return $this->hasOne('App\Models\PejabatProdi', 'users_id');
     }
 
     //role

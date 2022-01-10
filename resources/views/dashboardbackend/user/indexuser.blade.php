@@ -1,22 +1,28 @@
-@extends('dashboardbackend.layoutadmin.main')
+@extends('layout.main')
 @section('content')
-    <div class="container-fluid py-4">
-      <div class="row">
+
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-             <a href="{{ url('admin/user/create') }}"> <button type="button" class="btn btn-success " >Buat User Baru</button></a>
-              <h6>User</h6>
-              
+             <a href="{{ url('admin/user/create') }}"> <button type="button" class="btn btn-success" >Buat User Baru</button></a>
+              <h4>USER</h4>
             </div>
-            
+            <div class="card-header justify-content-end ">
+              <div class="col-md-3 ">
+                 <form action="">
+                   <div class="input-group ">
+                    <button class="btn btn-outline-primary mb-0" type="submit" >Cari</button>
+                     <input type="text" class="form-control text-center " placeholder="Cari Berdasarkan Nomor Induk" name="search" >
+                   </div>
+                 </form>
+              </div>
+             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor Induk</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Emaill</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
                       <th class="text-secondary opacity-7"></th>
@@ -33,28 +39,36 @@
                         </div>
                       </td>
                       <td>
-                        <h6 class="mb-0 text-sm">{{$users->email ?? ''}}</h6>
+                        <h6 class="mb-0 text-sm">
+                          @if($users->role_id==1)
+                            {{$users->jenis_role ?? ''}}
+                          @endif
+                          @if($users->role_id==2)
+                            {{$users->pejabatprodi->nama ?? ''}}
+                          @endif
+                          @if($users->role_id==3)
+                            {{$users->stafprodi->nama ?? ''}}
+                          @endif
+                          @if($users->role_id==4)
+                            {{$users->dosen->nama ?? ''}}
+                          @endif
+                          @if($users->role_id==5)
+                            {{$users->detail_mahasiswa->nama ?? ''}}
+                          @endif
+                        </h6>
                       </td>
-                      <td>
-                        <h6 class="mb-0 text-sm">{{$users->detail_mahasiswa->nama ?? ''}}</h6>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <h6 class="mb-0 text-sm">{{$users->role->jenis_role ?? ''}}</h6>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                        &nbsp
-						            {{-- <a  class="text-secondary font-weight-bold text-xs text-danger" data-toggle="tooltip" data-original-title="Delete User" href="{{route('jadwalkp.destroy',$jadwal_kps->id)}}" onclick="event.preventDefault(); --}}
-                          {{-- document.getElementById('delete').submit();">
+                      <td class="align-middle text-center">
+                        <form action="{{url('admin/user/'.$users->id.'/edit')}}" method="GET">
+                            <button type="submit" class="btn  btn-sm">edit</button>
+                        </form>
+                          <form action="{{ route('super_admin.user.destroy', $users->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn  btn-sm">Delete</button>
+                        </form>
                           
-                            {!! method_field('DELETE') . csrf_field()!!}
-
-                          Delete --}}
-                          {{-- <form id="delete" action="{{route('jadwalkp.destroy',$jadwal_kps->id)}}" method="post">  {!! method_field('delete') . csrf_field()!!} --}}
-                          </form>
-                          </a>
+                   
+                     
                       </td>
                     </tr>
                     @endforeach
@@ -63,6 +77,7 @@
               </div>
             </div>
           </div>
+          
         </div>
       </div>
 @endsection

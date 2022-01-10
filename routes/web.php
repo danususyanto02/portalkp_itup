@@ -14,7 +14,14 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\JadwalKpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserData\DosendataController;
+use App\Http\Controllers\UserData\MahasiswadataController;
+use App\Http\Controllers\UserData\PejabatprodidataController;
+use App\Http\Controllers\UserData\StafprodidataController;
 use App\Http\Controllers\VideoController;
+use App\Models\DetailMahasiswa;
+use App\Models\Dosen;
+use App\Models\JadwalKp;
 use App\Models\PejabatProdi;
 use App\Models\StafProdi;
 use Illuminate\Routing\RouteGroup;
@@ -36,69 +43,52 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', [DashboardController::class, 'dashboard']);
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
-
-Route::get('/jadwalkp', function () {
-    return view('dashboardmahasiswa.jadwalkp');
-});
-
-//  Route::get('/logincoba', function () {
-//      return view('logintest');
-// });
 Route::get('/register', function() {
-    return back();
+     return abort(404);
 });
 
-
-
-// Route::get('/berita', function () {
-//     return view('dashboardstaff/berita');
-// });
-
-// Route::post('file', [FileController::class, 'store'])->name('store');
-// // Route::get('/index', [FileController::class, 'index']);
-// Route::get('/view-video/{id}', [FileController::class, 'show']);
-// Route::get('/view-video/download/{file}', [FileController::class, 'download']);
 
 Route::group(['middleware'=>'auth'], function(){
-    Route::resource('filebriefing',FileBriefingController::class);
-    Route::resource('dashboard',DashboardController::class);
-    Route::resource('beritakp',BeritakpController::class);
-    Route::resource('beritaprodi',BeritaprodiController::class); 
-    Route::resource('file',FileController::class); 
-    Route::resource('video',VideoController::class); 
+    
 
+    Route::resource('dashboard',DashboardController::class);
+    Route::get('jadwalkp', [JadwalKpController::class, 'index']);
+    Route::get('databimbingan', [UserController::class, 'bimbingan'])->name('mahasiswa');
+    
     Route::group(['middleware' => 'role:super_admin','prefix'=>'admin','as'=>'super_admin.'], function(){
-        Route::resource('user',UserController::class); 
+        Route::resource('data-pejabat-prodi',PejabatprodidataController::class); 
+        Route::resource('data-staf-prodi',StafprodidataController::class); 
+        Route::resource('data-dosen',DosendataController::class); 
+        Route::resource('data-mahasiswa',MahasiswadataController::class); 
+
         Route::resource('jadwalkp',JadwalKpController::class); 
-        Route::resource('beritakp',BeritakpController::class);
-        Route::resource('beritaprodi',BeritaprodiController::class); 
+
+        Route::resource('user',UserController::class); 
+        Route::resource('filebriefing',FileBriefingController::class);
         Route::resource('file',FileController::class); 
+        Route::resource('beritakp',BeritakpController::class);
+        Route::resource('video',VideoController::class); 
+    });
+    
+
+    Route::group(['middleware' => 'role:staf_prodi','prefix'=>'staf-prodi','as'=>'staf_prodi.'], function(){
+
+        Route::resource('jadwalkp',JadwalKpController::class); 
+
+        Route::resource('profile', ProfileStafprodiController::class);
+        Route::resource('filebriefing',FileBriefingController::class);
+        Route::resource('file',FileController::class);    
+        Route::resource('beritakp',BeritakpController::class);
         Route::resource('video',VideoController::class); 
     });
 
     Route::group(['middleware' => 'role:pejabat_prodi','prefix'=>'pejabat-prodi','as'=>'pejabat_prodi.'], function(){
         Route::resource('profile', ProfilePejabatprodiController::class);
-        Route::resource('jadwalkp',JadwalKpController::class); 
-        Route::resource('profile', PejabatProdi::class);
-        Route::resource('beritaprodi',BeritaprodiController::class); 
-    });
-
-    Route::group(['middleware' => 'role:staf_prodi','prefix'=>'staf-prodi','as'=>'staf_prodi.'], function(){
-        Route::resource('jadwalkp',JadwalKpController::class); 
-        Route::resource('video',VideoController::class); 
-        Route::resource('profile', ProfileStafprodiController::class);
         Route::resource('beritakp',BeritakpController::class);
-        Route::resource('beritaprodi',BeritaprodiController::class); 
-        Route::resource('file',FileController::class); 
     });
 
     Route::group(['middleware' => 'role:dosen','prefix'=>'dosen','as'=>'dosen.'], function(){
-        Route::resource('jadwalkp',JadwalKpController::class); 
         Route::resource('profile', ProfileDosenController::class );
     });
 
@@ -107,39 +97,5 @@ Route::group(['middleware'=>'auth'], function(){
     });
 });
 
-// Route::prefix('dashboard')
-//     ->middleware(['auth:sanctum','verified'])
-//     ->group(function() {
-//         Route::resource('user',UserController::class); 
-       
-//         Route::get('/', [DashboardStaffController::class, 'index']);
-        
-        
-//         Route::resource('jadwalkp',JadwalKpController::class); 
-    
-     
-//         Route::resource('profile-mhw', ProfileMahasiswaController::class);
-//         Route::resource('profile-dosen', ProfileDosenController::class );
-
-//         //Video
-//         // Route::resource('video',VideoController::class); 
-//         // Route::get('download/{id}', [VideoController::class, 'download'])->name('download');
-
-
-
-//         // Route::get('dashboardstaff.file.crudvideo.indexvideo', [VideoController::class, 'download'])
-//         // ->name('download');
-
-//         // Route::get('/index-video', [FileController::class, 'index']);
-//         // Route::post('/index-video', [FileController::class, 'destroy_video']);
-//         // Route::get('/upload-video', [FileController::class, 'create']);
-//     });
-
-//     Route::prefix('dashboard')
-//     ->middleware(['auth:sanctum','verified'])
-//     ->group(function() {
-//         Route::get('/', [Dashboardmhw::class, 'index']);
-
-//     });
 
 

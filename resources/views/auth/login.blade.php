@@ -47,7 +47,7 @@
 
             <div>
                 <x-jet-label for="nomor_induk" value="{{ __('Nomor Induk') }}" />
-                <x-jet-input id="nomor_induk" class="block mt-1 w-full" type="text" name="nomor_induk" :value="old('nomor_induk')" required autofocus />
+                <x-jet-input id="nomor_induk" class="block mt-1 w-full" type="number" name="nomor_induk" :value="old('nomor_induk')" required autofocus />
             </div>
 
             

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
-
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate ;
 use Illuminate\Support\Facades\Storage;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class VideoController extends Controller
 {
@@ -17,14 +19,11 @@ class VideoController extends Controller
      */
     public function index()
     {
-
         $video=Video::all();
         return view('dashboardbackend.file.crudvideo.indexvideo', compact('video'), );
     }
 
-    public function test()
-    {
-       $dadawd = 'asdasd' ;}
+
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +52,7 @@ class VideoController extends Controller
             $video->video = $nama_file;
         }
         $video->save();
-        return redirect('/dashboard/video');   
+        return redirect('dashboard');   
     }
 
     /**
@@ -64,15 +63,15 @@ class VideoController extends Controller
      */
     public function show($id)
     {
-        $data=Video::find($id);
+        $data=Video::all();
         return view('dashboardstaff.file.detail', compact('data'));
     }
 
-    public function download(Request $request, $video)
-    { 
-        return response()->download(public_path('storage/file'.$video));
+    // public function download(Request $request, $video)
+    // { 
+    //     return response()->download(public_path('storage/file'.$video));
      
-    }
+    // }
 
 
 

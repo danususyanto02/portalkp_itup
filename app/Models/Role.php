@@ -9,9 +9,9 @@ class Role extends Model
 {
     use HasFactory;
     public $table = 'role';
-    protected $fillable = ['name'];
+    protected $fillable = ['jenis_role'];
 
-    public function role_user(){
-        return $this->hasMany('App\Models\DetailMahasiswa', 'users_id');
+    public function user(){
+        return $this->hasOne('App\Models\User', 'role_id');
     }
 }

@@ -18,6 +18,11 @@
     <link href="{{asset('../assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('../assets/css/soft-ui-dashboard.css?v=1.0.3')}}" rel="stylesheet" />
+    {{-- alpine.js --}}
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v3.0.6/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
 
         <!-- Styles -->
         <style>
@@ -31,7 +36,7 @@
         </style>
     </head>
     <body>            
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 text-center">
                 <div class="container">
                     <div class="row mb-1 justify-center">
                       <div class="col-md-6 p-9">
@@ -62,13 +67,62 @@
                     @endauth
                 </div>
                  @endif
+
+                 <div x-data="{ open: false }" class="p-4">
+                    <button @click="open = true" class="btn btn-secondary">Pendahuluan Kerja Praktik</button>
+                    <div>
+                    <span x-show="open">
+                        Sesuai dengan kurikulum Program Sarjana (S1) Jurusan Teknik 
+                        Informatika Fakultas Teknik Universitas Pancasila, seluruh mahasiswa diwajibkan 
+                        melaksanakan Kerja Praktek sebagai syarat untuk memenuhi kurikulum Sarjana 
+                        S1. Kerja Praktek dilaksanakan dengan bimbingan dosen pembimning lapangan. 
+                        Hasil Kerja Praktek disusun dalam suatu laporan dan dinilai melalui evaluasi Kerja 
+                        Praktek. Kerja Praktek dapat dilaksanakan bersamaan dengan kegiatan 
+                        pemenuhan jumlah satuan kredit semester (sks).
+                    </span>
                 </div>
-                    </div>
+                </div>
+                 
+
+                </div>
+                </div>
                 </div>
 
 
                 </div>
             </div>
         </div>
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+              <div class="row align-items-center justify-content-lg-between">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                  <div class="copyright text-center text-sm text-muted text-lg-start">
+                    © <script>
+                      document.write(new Date().getFullYear())
+                    </script>,
+                    made with <i class="fa fa-heart"></i> by
+                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                    for a better web.
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                    <li class="nav-item">
+                      <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="https://creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </footer>
     </body>
 </html>

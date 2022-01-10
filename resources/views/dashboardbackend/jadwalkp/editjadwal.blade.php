@@ -1,4 +1,4 @@
-@extends('dashboardbackend.layoutadmin.main')
+@extends('layout.main')
 @section('content')
 <div class="container-fluid py-4">
     <div class="row">
@@ -7,7 +7,16 @@
           <div class="card-header pb-0">
             <h4> <strong>UBAH JADWAL KP</strong> </h4>
           </div>
-          <form action="{{ route('jadwalkp.store') }}" method="POST" enctype="multipart/form-data">
+          <form action="
+          @if (auth()->user()->role_id==1)
+            {{ route('super_admin.jadwalkp.update',$jadwalkp->id) }}
+          @endif
+          @if (auth()->user()->role_id==3)
+          {{ route('staf_prodi.jadwalkp.update',$jadwalkp->id) }}
+          @endif
+
+       " method="POST" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
             <div class="p-0 mx-3 mt-3 position-relative z-index-12">
               <div class="card-body px-0 pt-0 pb-2">

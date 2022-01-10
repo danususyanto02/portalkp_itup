@@ -13,6 +13,7 @@ class PejabatProdi extends Model
     protected $fillable = [
 
         'nama',
+        'no_telpon',
         'jabatan',
         'users_id',
     ];

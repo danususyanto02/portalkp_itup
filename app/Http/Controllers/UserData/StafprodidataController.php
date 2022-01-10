@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\UserData;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Profile\UpdateProfileRequest;
-use App\Models\DetailPejabatProdi;
-use App\Models\PejabatProdi;
 use App\Models\StafProdi;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ProfilePejabatprodiController extends Controller
+class StafprodidataController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::where('id', Auth::user()->id)->first();
-        return view('dashboardbackend.profile', compact('user'));
+        $staf = StafProdi::all();
+        if($staf->has('search')){
+            $staf= StafProdi::where('nama','like','%'.$request->search.'%')->get();
+        }else{
+            $staf = StafProdi::all();
+        }
+    
+        return view ('form.stafprodi.indexform', compact('staf'));
     }
 
     /**
@@ -64,7 +65,8 @@ class ProfilePejabatprodiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = StafProdi::find($id);
+        return view('form.stafprodi.editform',compact('edit'));
     }
 
     /**
@@ -74,22 +76,20 @@ class ProfilePejabatprodiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request_profile, PejabatProdi $request_detail_dosen)
+    public function update(Request $request, $id)
     {
-        $data_profile = $request_profile->all();
-        $data_detail_user = $request_detail_dosen->all();
+        $request->validate([
+            'nama' => 'required|string',
+            'no_telpon' => 'required|string',
+        ]);
 
-        // proses save to user
-        $user = User::find(Auth::user()->id);
-        $user->update($data_profile);
+        $datauser = StafProdi::find($id);
+        $datauser->update([
+            'nama' => $request -> nama,
+            'no_telpon' => $request -> no_telpon,
 
-        $data_detail_user = [
-            'nama'         => request()->input('nama'),
-            'no_telpon'         => request()->input('no_telpon'),
-        ];
-        // ptoses save to detail user
-        $detail_user = PejabatProdi::find($user->pejabatprodi->id);
-        $detail_user->update($data_detail_user);
+        ]); 
+        return redirect()->route('super_admin.data-staf-prodi.index');
     }
 
     /**

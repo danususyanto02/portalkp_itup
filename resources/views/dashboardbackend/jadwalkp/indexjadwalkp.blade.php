@@ -5,8 +5,14 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              @if (auth()->user()->role_id!=5)
-             <a href="{{ route('jadwalkp.create') }}"> <button type="button" class="btn btn-success " >Buat Jadwal Baru</button></a>
+              @if (auth()->user()->role_id!=5&&4)
+             <a href="
+              @if (auth()->user()->role_id==1)
+              {{route('super_admin.jadwalkp.create')}}
+              @endif
+              @if (auth()->user()->role_id==3)
+              {{route('staf_prodi.jadwalkp.create')}}
+              @endif "> <button type="button" class="btn btn-success " >Buat Jadwal Baru</button></a>
              @endif
               <h6>Jadwal KP</h6>
               
@@ -20,7 +26,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">  Kegiatan</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dari Tanggal</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sampai Tanggal</th>
-                      <th class="text-secondary opacity-7"></th>
+                
                     </tr>
                   </thead>
                   <tbody>
@@ -39,23 +45,37 @@
                       <td class="align-middle text-center text-sm">
                         <h6 class="mb-0 text-sm">{{$jadwal_kps->sampaitanggal}}</h6>
                       </td>
+                      @if (auth()->user()->role_id!=5&&4)
+                      <td class="align-middle text-center">
+                        <form action="
+                          @if (auth()->user()->role_id==1)
+                         {{url('admin/jadwalkp/'.$jadwal_kps->id.'/edit')}}
+                          @endif
+                          @if (auth()->user()->role_id==3)
+                          {{url('staf-prodi/jadwalkp/'.$jadwal_kps->id.'/edit')}}
+                          @endif
+
+                         " method="GET">
+                            <button type="submit" class="btn  btn-sm">edit</button>
+                        </form>
                       @if (auth()->user()->role_id!=5)
-
-                      <td class="align-middle">
-                        <a href="{{url('jadwalkp/'.$jadwal_kps->id.'/edit')}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                        &nbsp
-						            <a  class="text-secondary font-weight-bold text-xs text-danger" data-toggle="tooltip" data-original-title="Delete User" href="{{route('jadwalkp.destroy',$jadwal_kps->id)}}" onclick="event.preventDefault();
-                          document.getElementById('delete').submit();">
+                          <form action="
+                          @if (auth()->user()->role_id==1)
+                          {{ route('super_admin.jadwalkp.destroy', $jadwal_kps->id) }}
+                          @endif
+                          @if (auth()->user()->role_id==3)
+                          {{ route('staf_prodi.jadwalkp.destroy', $jadwal_kps->id) }}
+                          @endif
+                          " method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn  btn-sm">Delete</button>
+                        </form>
                           
-                            {!! method_field('DELETE') . csrf_field()!!}
-
-                          Delete
-                          <form id="delete" action="{{route('jadwalkp.destroy',$jadwal_kps->id)}}" method="post">  {!! method_field('delete') . csrf_field()!!}
-                          </form>
-                          </a>
+                
+                     
                       </td>
+                      @endif
                       @endif
                     </tr>
                     @endforeach

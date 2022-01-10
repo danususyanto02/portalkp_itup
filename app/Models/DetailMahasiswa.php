@@ -26,8 +26,10 @@ class DetailMahasiswa extends Model
 
     //relasi data mhw ke user
     public function user(){
-        return $this->belongsTo('App/Models/User', 'user_id','id');
+        return $this->belongsTo('App\Models\User', 'users_id','id');
     }
+
+    
     
     //relasi bimbingan kp
     public function dosen(){

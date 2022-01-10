@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use App\Models\FileBriefing;
 use Illuminate\Http\Request;
-
+use Storage;
 class FileBriefingController extends Controller
 {
     /**
@@ -48,7 +49,11 @@ class FileBriefingController extends Controller
             $filebriefing->file = $nama_file;
         }
         $filebriefing->save();
-        return redirect()->route('filebriefing.index');
+        if(auth()->user()->role_id==1){
+            return redirect()->route('super_admin.filebriefing.index');
+        }elseif(auth()->user()->role_id==3){
+            return redirect()->route('staf_prodi.filebriefing.index');
+        }
     }
 
     /**
@@ -91,8 +96,9 @@ class FileBriefingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FileBriefing $filebriefing)
     {
-        //
+        $filebriefing->delete();
+        return redirect()->back();
     }
 }

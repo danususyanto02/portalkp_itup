@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\UserData;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Profile\UpdateProfileRequest;
-use App\Models\DetailPejabatProdi;
-use App\Models\PejabatProdi;
-use App\Models\StafProdi;
-use App\Models\User;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ProfilePejabatprodiController extends Controller
+class DosendataController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::where('id', Auth::user()->id)->first();
-        return view('dashboardbackend.profile', compact('user'));
+        $dosen = Dosen::all();
+        if($request->has('search')){
+            $dosen= Dosen::where('nama','like','%'.$request->search.'%')->get();
+        }else{
+            $dosen = Dosen::all();
+        }
+        
+        return view ('form.dosen.indexform', compact('dosen'));
+      
     }
 
     /**
@@ -64,7 +66,8 @@ class ProfilePejabatprodiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = Dosen::find($id);
+        return view('form.dosen.editform',compact('edit'));
     }
 
     /**
@@ -74,22 +77,19 @@ class ProfilePejabatprodiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request_profile, PejabatProdi $request_detail_dosen)
+    public function update(Request $request, $id)
     {
-        $data_profile = $request_profile->all();
-        $data_detail_user = $request_detail_dosen->all();
+        $request->validate([
+            'nama' => 'required|string',
+            'no_telpon' => 'required|string',
+        ]);
 
-        // proses save to user
-        $user = User::find(Auth::user()->id);
-        $user->update($data_profile);
-
-        $data_detail_user = [
-            'nama'         => request()->input('nama'),
-            'no_telpon'         => request()->input('no_telpon'),
-        ];
-        // ptoses save to detail user
-        $detail_user = PejabatProdi::find($user->pejabatprodi->id);
-        $detail_user->update($data_detail_user);
+        $datauser = Dosen::find($id);
+        $datauser->update([
+            'nama' => $request -> nama,
+            'no_telpon' => $request -> no_telpon,
+        ]); 
+        return redirect()->route('super_admin.data-dosen.index');
     }
 
     /**

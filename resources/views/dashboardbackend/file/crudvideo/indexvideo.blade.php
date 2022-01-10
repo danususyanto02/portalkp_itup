@@ -10,7 +10,16 @@
           <div class="col-12">
             <div class="card mb-4">
               <div class="card-header pb-0">
-                <a href="{{route('video.create')}}"> <button type="button" class="btn btn-success " >Upload Video Baru</button></a>
+                <a href="
+                
+                @if (auth()->user()->role_id==1)
+                   {{route('super_admin.video.create')}}
+                @endif
+                @if (auth()->user()->role_id==3)
+                {{route('staf_prodi.video.create')}}
+                @endif
+                
+              "> <button type="button" class="btn btn-success " >Upload Video Baru</button></a>
                 <h6>Table Video</h6>
               </div>
               <div class="card-body px-0 pt-0 pb-2">
@@ -42,20 +51,32 @@
                         <td class="align-middle text-center text-sm">
                           <span class="text-xs font-weight-bold mb-0">{{$data->title}}</span>
                         </td>
+                        
                         <td class="align-middle text-center text-sm">        
-                            <iframe class="border-radius-lg" width="426" height="240" src="{{url('storage/file/'.$data->video)}}" allowfullscreen></iframe>
+                          <video width="426" height="240" controls>
+                            <source src="{{url('storage/file/'.$data->video)}}" type="video/mp4">
+                              
+                        </video>
+                            {{-- <iframe class="border-radius-lg" width="426" height="240" src="{{url('storage/file/'.$data->video)}}"></iframe> --}}
                         </td>
                         <td class="align-middle text-center">
-                          <form method="post" action=""> 
-                            <button type="submit" class="btn  btn-sm">edit</button>
-                        </form>
-                        <form method="post" action="{{route('video.destroy',$data->id)}}">
+                        <form method="post" action="
+                        
+                        @if (auth()->user()->role_id==1)
+                           {{route('super_admin.video.destroy',$data->id)}}
+                            @endif
+                          @if (auth()->user()->role_id==3)
+                            {{route('staf_prodi.video.destroy',$data->id)}}
+                           @endif
+
+                       ">
                           @method('delete')
                           @csrf
                           <button type="submit" class="btn  btn-sm">Delete</button>
+                        </form>
                         </td>
                         {{-- kalo mau buat fitur download harus sesuai, misalkan video uploadnya harus berjenis file video, kalo excel harus upload excel --}}
-                        <a class="download" href="{{url('storage/file/'.$data->video)}}">DOWNLOAD</a>
+                        {{-- <a class="download" href="{{url('storage/file/'.$data->video)}}">DOWNLOAD</a> --}}
                       </tr>
                       
                       @endforeach

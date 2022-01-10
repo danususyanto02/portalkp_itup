@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beritakp;
-
+use App\Models\PejabatProdi;
+use App\Models\StafProdi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -44,7 +45,15 @@ class BeritakpController extends Controller
         $beritakp->pengirim=$request->pengirim;
         $beritakp->users_id=Auth::user()->id;
         $beritakp->save();
-        return redirect()->route('beritakp.index');
+
+        if(auth()->user()->role_id==1){
+            return redirect()->route('super_admin.beritakp.index');
+        }elseif(auth()->user()->role_id==2){
+            return redirect()->route('pejabat_prodi.beritakp.index');
+        }elseif(auth()->user()->role_id==3){
+            return redirect()->route('staf_prodi.beritakp.index');
+        }
+
     }
 
     /**
@@ -89,7 +98,13 @@ class BeritakpController extends Controller
         $beritakp->info_berita=$request->info_berita;
         $beritakp->pengirim=$request->pengirim;
         $beritakp->update();
-        return redirect()->route('beritakp.index');
+        if(auth()->user()->role_id==1){
+            return redirect()->route('super_admin.beritakp.index');
+        }elseif(auth()->user()->role_id==2){
+            return redirect()->route('pejabat_prodi.beritakp.index');
+        }elseif(auth()->user()->role_id==3){
+            return redirect()->route('staf_prodi.beritakp.index');
+        }
     }
 
     /**

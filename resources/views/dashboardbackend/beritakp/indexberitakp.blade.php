@@ -5,7 +5,17 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-             <a href="{{ route('beritakp.create') }}"> <button type="button" class="btn btn-success" >Buat Berita KP Baru</button></a>
+             <a href="
+             @if (auth()->user()->role_id==1)
+             {{route('super_admin.beritakp.create')}}
+             @endif
+             @if (auth()->user()->role_id==2)
+             {{route('staf_prodi.beritakp.create')}}
+             @endif
+             @if (auth()->user()->role_id==3)
+             {{route('pejabat_prodi.beritakp.create')}}
+             @endif
+            "> <button type="button" class="btn btn-success" >Buat Berita KP Baru</button></a>
               <h6>BERITA PRODI</h6>
               
             </div>
@@ -39,17 +49,50 @@
                         <h6 class="mb-0 text-sm">{{$databerita->created_at->format('d M Y')}}</h6>
                       </td>
                       <td class="align-middle">
-                        <a href="{{url('beritakp/'.$databerita->id.'/edit')}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="
+                        @if (auth()->user()->role_id==1)
+                        {{url('admin/beritakp/'.$databerita->id.'/edit')}}
+                         @endif
+                         @if (auth()->user()->role_id==2)
+                         {{url('pejabat-prodi/beritakp/'.$databerita->id.'/edit')}}
+                         @endif
+                        @if (auth()->user()->role_id==3)
+                        {{url('staf-prodi/beritakp/'.$databerita->id.'/edit')}}
+                        @endif
+
+
+                        
+                        " class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                         &nbsp
-						            <a  class="text-secondary font-weight-bold text-xs text-danger" data-toggle="tooltip" data-original-title="Delete User" href="{{route('beritakp.destroy',$databerita->id)}}" onclick="event.preventDefault();
+						            <a  class="text-secondary font-weight-bold text-xs text-danger" data-toggle="tooltip" data-original-title="Delete User" href="
+                         @if (auth()->user()->role_id==1)
+                           {{route('super_admin.beritakp.destroy',$databerita->id)}}
+                            @endif
+                          @if (auth()->user()->role_id==3)
+                            {{route('staf_prodi.beritakp.destroy',$databerita->id)}}
+                           @endif
+                           @if (auth()->user()->role_id==3)
+                           {{route('pejabat_prodi.beritakp.store')}}
+                           @endif
+                       " onclick="event.preventDefault();
                           document.getElementById('delete').submit();">
                           
                             {!! method_field('DELETE') . csrf_field()!!}
 
                           Delete
-                          <form id="delete" action="{{route('beritakp.destroy',$databerita->id)}}" method="post">  {!! method_field('delete') . csrf_field()!!}
+                          <form id="delete" action="
+                            @if (auth()->user()->role_id==1)
+                            {{route('super_admin.beritakp.destroy',$databerita->id)}}
+                            @endif
+                            @if (auth()->user()->role_id==2)
+                            {{route('pejabat_prodi.beritakp.destroy',$databerita->id)}}
+                            @endif
+                            @if (auth()->user()->role_id==3)
+                            {{route('staf_prodi.beritakp.destroy',$databerita->id)}}
+                            @endif" 
+                            method="post">  {!! method_field('delete') . csrf_field()!!}
                           </form>
                           </a>
                       </td>

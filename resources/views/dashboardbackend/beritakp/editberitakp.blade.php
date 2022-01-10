@@ -8,7 +8,18 @@
         <div class="card-header pb-0">
           <h4> <strong>BERITA KP</strong> </h4>
         </div>
-        <form action="{{route('beritakp.update',$berita->id)}}" method="POST" enctype="multipart/form-data">
+        <form action="
+        @if (auth()->user()->role_id==1)
+             {{route('super_admin.beritakp.update',$berita->id)}}
+             @endif
+             @if (auth()->user()->role_id==2)
+             {{route('staf_prodi.beritakp.update',$berita->id)}}
+             @endif
+             @if (auth()->user()->role_id==3)
+             {{route('pejabat_prodi.beritakp.update',$berita->id)}}
+             @endif
+        " 
+        method="POST" enctype="multipart/form-data">
           @csrf
           @method('put')
           <div class="p-0 mx-3 mt-3 position-relative z-index-12">
