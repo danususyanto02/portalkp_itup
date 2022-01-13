@@ -15,7 +15,7 @@
                     {{route('staf_prodi.filebriefing.create')}}
                 @endif
                 
-               "> <button type="button" class="btn btn-success " >Upload Video Baru</button></a>
+               "> <button type="button" class="btn btn-success " >Upload File Briefing </button></a>
                 <h6>Table Video</h6>
               </div>
               <div class="card-body px-0 pt-0 pb-2">

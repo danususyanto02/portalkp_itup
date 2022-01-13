@@ -16,7 +16,6 @@ class CreateBeritakpTable extends Migration
         Schema::create('beritakp', function (Blueprint $table) {
             $table->id();
             $table->longText('info_berita')->nullable();
-            $table->string('pengirim')->nullable();
             $table->foreignId('users_id')->nullable()->index('fk_beritakp_to_user'); 
             $table->timestamps();
         });

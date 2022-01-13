@@ -116,7 +116,7 @@ class ProfileDosenController extends Controller
      */
     public function test($id)
     {
-        //
+        return abort(404);
     }
     
 }

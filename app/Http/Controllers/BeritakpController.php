@@ -64,7 +64,7 @@ class BeritakpController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**

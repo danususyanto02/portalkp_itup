@@ -54,7 +54,7 @@ class BeritaprodiController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     public function dashboard(){
