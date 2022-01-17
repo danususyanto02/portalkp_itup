@@ -12,10 +12,10 @@
     @csrf
     <div class="form-group">
         <label >Nama File</label>
-        <input type="text" name="nama" class="form-control" >
+        <input type="text" name="nama" class="form-control" placeholder="Nama File" >
       </div>
       <div class="input-group mb-3">
-        <input type="file" name="file" class="form-control" for="file " id="file">
+        <input type="file" name="file" class="form-control" for="file "  accept="application/pdf"  id="file">
       </div>
       <button type="submit" value="submit" class="btn btn-primary">Upload</button>
 </form>

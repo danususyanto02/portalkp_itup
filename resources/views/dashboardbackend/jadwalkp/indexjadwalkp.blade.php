@@ -5,7 +5,17 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              @if (auth()->user()->role_id!=5&&4)
+              @if (auth()->user()->role_id==3)
+             <a href="
+              @if (auth()->user()->role_id==1)
+              {{route('super_admin.jadwalkp.create')}}
+              @endif
+              @if (auth()->user()->role_id==3)
+              {{route('staf_prodi.jadwalkp.create')}}
+              @endif "> <button type="button" class="btn btn-success " >Buat Jadwal Baru</button></a>
+             @endif
+
+             @if (auth()->user()->role_id==1)
              <a href="
               @if (auth()->user()->role_id==1)
               {{route('super_admin.jadwalkp.create')}}
@@ -45,7 +55,7 @@
                       <td class="align-middle text-center text-sm">
                         <h6 class="mb-0 text-sm">{{$jadwal_kps->sampaitanggal}}</h6>
                       </td>
-                      @if (auth()->user()->role_id!=5&&4)
+                      @if (auth()->user()->role_id==1)
                       <td class="align-middle text-center">
                         <form action="
                           @if (auth()->user()->role_id==1)
@@ -58,7 +68,24 @@
                          " method="GET">
                             <button type="submit" class="btn  btn-sm">edit</button>
                         </form>
-                      @if (auth()->user()->role_id!=5)
+                        @endif
+
+                        @if (auth()->user()->role_id==3)
+                      <td class="align-middle text-center">
+                        <form action="
+                          @if (auth()->user()->role_id==1)
+                         {{url('admin/jadwalkp/'.$jadwal_kps->id.'/edit')}}
+                          @endif
+                          @if (auth()->user()->role_id==3)
+                          {{url('staf-prodi/jadwalkp/'.$jadwal_kps->id.'/edit')}}
+                          @endif
+
+                         " method="GET">
+                            <button type="submit" class="btn  btn-sm">edit</button>
+                        </form>
+                        @endif
+
+                      @if (auth()->user()->role_id==1)
                           <form action="
                           @if (auth()->user()->role_id==1)
                           {{ route('super_admin.jadwalkp.destroy', $jadwal_kps->id) }}
@@ -72,11 +99,27 @@
                             <button type="submit" class="btn  btn-sm">Delete</button>
                         </form>
                           
-                
-                     
                       </td>
                       @endif
+
+                      @if (auth()->user()->role_id==3)
+                          <form action="
+                          @if (auth()->user()->role_id==1)
+                          {{ route('super_admin.jadwalkp.destroy', $jadwal_kps->id) }}
+                          @endif
+                          @if (auth()->user()->role_id==3)
+                          {{ route('staf_prodi.jadwalkp.destroy', $jadwal_kps->id) }}
+                          @endif
+                          " method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn  btn-sm">Delete</button>
+                        </form>
+                          
+                      </td>
                       @endif
+
+                      
                     </tr>
                     @endforeach
                   </tbody>

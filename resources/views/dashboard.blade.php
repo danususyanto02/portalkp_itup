@@ -72,6 +72,7 @@
         @endforeach
       </div>
      
+      <div class="row">
       <div class="col-lg-5 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
@@ -85,7 +86,88 @@
           </div>
         </div>
       </div>
+      @if(auth()->user()->role_id==1)
+      <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="card card-frame">
+          <div class="card-body">
+            <h5>Data Diri</h5>
+            <div>
+              <strong>Nomor Induk : {{ Auth::user()->nomor_induk ?? '' }}</strong><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
+
+      @if(auth()->user()->role_id==2)
+      <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="card card-frame">
+          <div class="card-body">
+            <h5>Data Diri</h5>
+            <div>
+              <strong>Nomor Induk : {{ Auth::user()->nomor_induk ?? '' }}</strong><br>
+              <strong>Nama : {{ Auth::user()->pejabatprodi->nama ?? ''}}</strong><br>
+              <strong>Nomor Telepon : {{ Auth::user()->pejabatprodi->no_telpon ?? ''}}</strong><br>
+              <strong>Nama : {{ Auth::user()->pejabatprodi->jabatan ?? ''}}</strong><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
+      @if(auth()->user()->role_id==3)
+      <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="card card-frame">
+          <div class="card-body">
+            <h5>Data Diri</h5>
+            <div>
+              <strong>Nomor Induk : {{ Auth::user()->nomor_induk ?? '' }}</strong><br>
+              <strong>Nama : {{ Auth::user()->stafprodi->nama ?? ''}}</strong><br>
+              <strong>Nomor Telepon : {{ Auth::user()->stafprodi->no_telpon ?? ''}}</strong><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
+      
+      
+      @if(auth()->user()->role_id==4)
+      <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="card card-frame">
+          <div class="card-body">
+            <h5>Data Diri</h5>
+            <div>
+              <strong>Nomor Induk : {{ Auth::user()->nomor_induk ?? ''}}</strong><br>
+              <strong>Nama : {{ Auth::user()->dosen->nama ?? ''}}</strong><br>
+              <strong>Nomor Telepon : {{ Auth::user()->dosen->no_telpon ?? ''}}</strong><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
+
+      @if(auth()->user()->role_id==5)
+      <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="card card-frame">
+          <div class="card-body">
+            <h5>Data Diri</h5>
+            <div>
+              <strong>NPM : {{ Auth::user()->nomor_induk ?? ''}}</strong><br>
+              <strong>Nama : {{ Auth::user()->detail_mahasiswa->nama ?? ''}}</strong><br>
+              <strong>Alamat : {{ Auth::user()->detail_mahasiswa->alamat ?? ''}}</strong><br>
+              <strong>Tempat Tanggal Lahir : {{ Auth::user()->detail_mahasiswa->tempat_lahir ?? ''}},  {{ Auth::user()->detail_mahasiswa->tanggal_lahir ?? ''}}</strong><br>
+              <strong>Nomor Telepon : {{ Auth::user()->detail_mahasiswa->no_telpon ?? ''}}</strong><br>
+              @foreach ($mahasiswa as $item)
+              <strong>Pembimbing: {{$item->dosen->nama ?? ''}}</strong>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
+
+
     </div>
+  </div>
 
 
     

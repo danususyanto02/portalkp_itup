@@ -11,7 +11,7 @@
   <div class="form-group">
       <label for="name" class="form-control-label">Nama Pejabat Prodi</label>
 
-      <input placeholder="your name" type="text" name="nama" id="nama" autocomplete="nama" class="form-control" value="{{ $user->dosen->nama ?? '' }}" required>
+      <input placeholder="Nama" type="text" name="nama" id="nama" autocomplete="nama" class="form-control" value="{{ $user->dosen->nama ?? '' }}" required>
   </div>
 
 @endif

@@ -58,10 +58,15 @@ class UserController extends Controller
         return redirect()->route('super_admin.user.index');
     }
 
-    public function bimbingan(){
-        $mahasiswa = DetailMahasiswa::all();
-      
-        return view('dashboardbackend.mahasiswabimbingan',compact('mahasiswa'));
+    public function bimbingan(Request $request){
+        // $mahasiswa = DetailMahasiswa::all();
+        $dosen = Dosen::all();
+        if($request->has('search')){
+            $dosen= Dosen::where('nama','like','%'.$request->search.'%')->get();
+        }else{
+            $dosen = Dosen::all();
+        }
+        return view('dashboardbackend.mahasiswabimbingan',compact('dosen'));
     }
 
     

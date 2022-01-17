@@ -12,11 +12,11 @@
     @csrf
     <div class="form-group">
         <label >Nama File</label>
-        <input type="text" name="judul" class="form-control" >
+        <input type="text" name="judul" class="form-control"  placeholder="Nama File">
       </div>
       <div class="input-group mb-3">
-        <input type="file" name="video" class="form-control" for="video " id="video">
+        <input type="file" name="video" class="form-control" for="video " id="video" accept="video/*">
       </div>
-      <button type="submit" value="submit" class="btn btn-primary">Upload</button>
+      <button type="submit" value="submit" class="btn btn-primary" >Upload</button>
 </form>
 @endsection

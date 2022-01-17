@@ -54,16 +54,14 @@ Route::group(['middleware'=>'auth'], function(){
 
     Route::resource('dashboard',DashboardController::class);
     Route::get('jadwalkp', [JadwalKpController::class, 'index']);
-    Route::get('databimbingan', [UserController::class, 'bimbingan'])->name('mahasiswa');
+    Route::get('databimbingan', [UserController::class, 'bimbingan']);
     
     Route::group(['middleware' => 'role:super_admin','prefix'=>'admin','as'=>'super_admin.'], function(){
         Route::resource('data-pejabat-prodi',PejabatprodidataController::class); 
         Route::resource('data-staf-prodi',StafprodidataController::class); 
         Route::resource('data-dosen',DosendataController::class); 
         Route::resource('data-mahasiswa',MahasiswadataController::class); 
-
         Route::resource('jadwalkp',JadwalKpController::class); 
-
         Route::resource('user',UserController::class); 
         Route::resource('filebriefing',FileBriefingController::class);
         Route::resource('file',FileController::class); 
@@ -73,9 +71,7 @@ Route::group(['middleware'=>'auth'], function(){
     
 
     Route::group(['middleware' => 'role:staf_prodi','prefix'=>'staf-prodi','as'=>'staf_prodi.'], function(){
-
         Route::resource('jadwalkp',JadwalKpController::class); 
-
         Route::resource('profile', ProfileStafprodiController::class);
         Route::resource('filebriefing',FileBriefingController::class);
         Route::resource('file',FileController::class);    

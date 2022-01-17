@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dosen extends Model
 {
     use HasFactory;
+ 
 
     public $table = 'dosen';
 
@@ -26,12 +27,13 @@ class Dosen extends Model
     // }
 
 
-    
+
 
     //relasi bimbingan kp
     public function dospem(){
-        return $this->hasMany('App\Models\DetailMahasiswa', 'dospem_id');
+        return $this->hasOne('App\Models\DetailMahasiswa', 'dospem_id');
     } 
+    
 
     // public function jumlahbimbingan(){
     //     return $this->dospem()->join('dosen', '');
