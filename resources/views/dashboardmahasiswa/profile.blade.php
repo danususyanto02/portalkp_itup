@@ -55,7 +55,9 @@
 <div class="form-group">
   <label for="">Dosen Pembimbing</label>
   <select class="form-control" id="dospem_id"  type="dospem_id" name="dospem_id" id="dospem_id" >
+    <option selected="true" disabled="disabled" value="{{ Auth::user()->detail_mahasiswa->dosen->id ?? ''}}" >{{ Auth::user()->detail_mahasiswa->dosen->nama ?? ''}}</option>
     @foreach ($dosen as $datadosen)
+
     <option value="{{$datadosen->id}}">{{$datadosen['nama']}}</option>
     {{-- <option value="{{$jadwal_kps['id']}}">{{$jadwal_kps['nama']}} {{ $user->detail_mahasiswa->dospem_id ?? ''}}</option> --}}
     @endforeach

@@ -42,7 +42,6 @@ class BeritakpController extends Controller
     {
         $beritakp=new Beritakp;
         $beritakp->info_berita=$request->info_berita;
-        $beritakp->pengirim=$request->pengirim;
         $beritakp->users_id=Auth::user()->id;
         $beritakp->save();
 
@@ -96,7 +95,6 @@ class BeritakpController extends Controller
     {
         $beritakp= Beritakp::find($id);
         $beritakp->info_berita=$request->info_berita;
-        $beritakp->pengirim=$request->pengirim;
         $beritakp->update();
         if(auth()->user()->role_id==1){
             return redirect()->route('super_admin.beritakp.index');

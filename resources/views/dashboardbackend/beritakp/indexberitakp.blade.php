@@ -16,7 +16,7 @@
              {{route('pejabat_prodi.beritakp.create')}}
              @endif
             "> <button type="button" class="btn btn-success" >Buat Berita KP Baru</button></a>
-              <h6>BERITA PRODI</h6>
+              <h6>BERITA KP</h6>
               
             </div>
             
