@@ -12,4 +12,8 @@ class JadwalKp extends Model
     protected $fillable = [
         'kegiatan', 'daritanggal', 'sampaitanggal'
     ];
+
+    public function pengirim(){
+        return $this->belongsTo('App/Models/User', 'users_id','id');
+    }
 }

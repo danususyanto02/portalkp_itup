@@ -5,6 +5,7 @@ use App\Models\PejabatProdi;
 use App\Models\StafProdi;
 use App\Models\JadwalKp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDO;
 
 class JadwalKpController extends Controller
@@ -40,6 +41,7 @@ class JadwalKpController extends Controller
         $jadwal->kegiatan=$request->kegiatan;
         $jadwal->daritanggal=$request->daritanggal;
         $jadwal->sampaitanggal=$request->sampaitanggal;
+        $jadwal->users_id=Auth::user()->id;
         $jadwal->save();
         return redirect('/jadwalkp');
     }

@@ -9,5 +9,9 @@ class FileBriefing extends Model
 {
     use HasFactory;
     public $table='filebriefing';
-    protected $fillable=['nama','file'];
+    protected $fillable=['users_id','nama','file'];
+
+    public function pengirim(){
+        return $this->belongsTo('App/Models/User', 'users_id','id');
+    }
 }

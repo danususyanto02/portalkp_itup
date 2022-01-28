@@ -6,6 +6,7 @@ use App\Models\Video;
 use App\Models\PejabatProdi;
 use App\Models\StafProdi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate ;
 use Illuminate\Support\Facades\Storage;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -44,6 +45,7 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $video=new Video;
+        $video->users_id=Auth::user()->id;
         $video->judul=$request->judul;
         if($request->file('video')){
             $file = $request->file('video');

@@ -17,7 +17,12 @@ class CreateFilesTable extends Migration
             $table->id();
             $table->string('nama')->nullable();
             $table->string('file')->nullable();
+            $table->foreignId('users_id')->nullable()->index('fk_files_to_user'); 
             $table->timestamps();
+        });
+        Schema::table('files', function (Blueprint $table) {
+            $table->foreign('users_id','fk_files_to_user')->references('id')
+            ->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -29,5 +34,8 @@ class CreateFilesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('files');
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropForeign('fk_files_to_user');
+        });
     }
 }

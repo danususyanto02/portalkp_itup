@@ -17,8 +17,11 @@
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <div class="form-group">
-                  <label for="nomor_induk" class="form-control-label">Nomor Induk</label>
+                  <label for="nomor_induk" class="form-control-label @error('nomor_induk') is-invalid @enderror">Nomor Induk</label>
                   <input placeholder="nomor induk" type="number" name="nomor_induk" id="nomor_induk" class="form-control" required>
+                  @error('nomor_induk')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                 </div>
                 <div class="form-group">
                   <label for="password" class="form-control-label">Password</label>

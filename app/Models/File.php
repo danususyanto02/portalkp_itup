@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
-    protected $fillable=['nama','file'];
+    protected $fillable=['users_id','nama','file'];
+
+    public function pengirim(){
+        return $this->belongsTo('App/Models/User', 'users_id','id');
+    }
 }

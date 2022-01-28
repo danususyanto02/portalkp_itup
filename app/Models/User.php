@@ -90,7 +90,27 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Beritakp', 'users_id');
     }
 
-    public function beritaprodi(){
-        return $this->hasMany('App\Models\Beritakp', 'users_id');
+    //video
+    public function video(){
+        return $this->hasMany('App\Models\Video', 'users_id');
     }
+
+    //jadwalkp
+    public function jadwalkp(){
+        return $this->hasMany('App\Models\JadwalKp', 'users_id');
+    }
+
+    //file
+    public function file(){
+        return $this->hasMany('App\Models\File', 'users_id');
+    }
+
+    //file briefing
+    public function filebriefing(){
+        return $this->hasMany('App\Models\FileBriefing', 'users_id');
+    }
+
+    // public function beritaprodi(){
+    //     return $this->hasMany('App\Models\Beritakp', 'users_id');
+    // }
 }

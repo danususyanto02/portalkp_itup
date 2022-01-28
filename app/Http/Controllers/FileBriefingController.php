@@ -5,6 +5,7 @@ use App\Models\PejabatProdi;
 use App\Models\StafProdi;
 use App\Models\FileBriefing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 class FileBriefingController extends Controller
 {
@@ -42,6 +43,7 @@ class FileBriefingController extends Controller
     {
         $filebriefing=new FileBriefing();
         $filebriefing->nama=$request->nama;
+        $filebriefing->users_id=Auth::user()->id;
         if($request->file('file')){
             $filebriefingdata = $request->file('file');
             $nama_file = time().str_replace(" ", "", $filebriefingdata->getClientOriginalName());

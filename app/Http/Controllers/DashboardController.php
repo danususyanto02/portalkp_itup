@@ -24,9 +24,8 @@ class DashboardController extends Controller
         $bukupanduan = File::latest()->paginate(1);
         $filebriefing = FileBriefing::latest()->paginate(1);
         $beritakp = Beritakp::orderBy('created_at','ASC')->get();
-        $beritaprodi = Beritaprodi::orderBy('created_at','ASC')->get();
 
-        return view('dashboard',compact('beritaprodi','beritakp','bukupanduan','filebriefing','list','mahasiswa','video'));
+        return view('dashboard',compact('beritakp','bukupanduan','filebriefing','list','mahasiswa','video'));
            
     }
 

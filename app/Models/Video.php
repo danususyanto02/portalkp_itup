@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
-    protected $fillable=['judul','video'];
+
+    protected $fillable=[
+        'users_id','judul','video',
+    ];
+
+    public function pengirim(){
+        return $this->belongsTo('App/Models/User', 'users_id','id');
+    }
+    
 }

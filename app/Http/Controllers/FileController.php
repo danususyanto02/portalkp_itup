@@ -6,6 +6,7 @@ use App\Models\File;
 use Illuminate\Http\Request;
 use App\Models\PejabatProdi;
 use App\Models\StafProdi;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
@@ -43,6 +44,7 @@ class FileController extends Controller
     {
         $file=new File();
         $file->nama=$request->nama;
+        $file->users_id=Auth::user()->id;
         if($request->file('file')){
             $filedata = $request->file('file');
             $nama_file = time().str_replace(" ", "", $filedata->getClientOriginalName());

@@ -17,7 +17,12 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->string('judul')->nullable();
             $table->string('video')->nullable();
+            $table->foreignId('users_id')->nullable()->index('fk_video_to_user'); 
             $table->timestamps();
+        });
+        Schema::table('videos', function (Blueprint $table) {
+            $table->foreign('users_id','fk_video_to_user')->references('id')
+            ->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -29,5 +34,8 @@ class CreateVideosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('videos');
+        Schema::table('beritakp', function (Blueprint $table) {
+            $table->dropForeign('fk_video_to_user');
+        });
     }
 }

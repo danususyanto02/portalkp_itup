@@ -52,7 +52,7 @@
         <br>
       </div>
       @foreach ($bukupanduan as $key=>$data)
-      <div class="col-lg-5 mb-lg-0 mb-5">
+      <div class="col-lg-5 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
             <h5>Download Buku Panduan KP</h5>
@@ -73,7 +73,7 @@
       </div>
      
       <div class="row">
-      <div class="col-lg-5 mb-lg-0 mb-4 ">
+      <div class="col-lg-5 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
             <h5>Video Briefing</h5>
@@ -82,13 +82,12 @@
               <source src="{{url('storage/file/'.$data->video)}}" type="video/mp4">         
           </video>
         @endforeach
-    
+           
           </div>
         </div>
       </div>
       @if(auth()->user()->role_id==1)
-   
-      <div class="col-lg-7 mb-lg-0 mb-4 mt-4">
+      <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
             <h5>Data Diri</h5>
@@ -101,7 +100,7 @@
       @endif
 
       @if(auth()->user()->role_id==2)
-      <div class="col-lg-7 mb-lg-0 mb-4  mt-4">
+      <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
             <h5>Data Diri</h5>
@@ -116,7 +115,7 @@
       </div>
       @endif
       @if(auth()->user()->role_id==3)
-      <div class="col-lg-7 mb-lg-0 mb-4  mt-4">
+      <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
             <h5>Data Diri</h5>
@@ -132,7 +131,7 @@
       
       
       @if(auth()->user()->role_id==4)
-      <div class="col-lg-7 mb-lg-0 mb-4  mt-4">
+      <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
             <h5>Data Diri</h5>
@@ -147,7 +146,7 @@
       @endif
 
       @if(auth()->user()->role_id==5)
-      <div class="col-lg-7 mb-lg-0 mb-4  mt-4">
+      <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card card-frame">
           <div class="card-body">
             <h5>Data Diri</h5>

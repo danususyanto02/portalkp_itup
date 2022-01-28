@@ -18,8 +18,13 @@ class Jadwalkps extends Migration
             $table->string('kegiatan');
             $table->date('daritanggal');
             $table->date('sampaitanggal');
+            $table->foreignId('users_id')->nullable()->index('fk_jadwalkp_to_user'); 
             $table->rememberToken();
             $table->timestamps();
+        });
+        Schema::table('jadwal_kps', function (Blueprint $table) {
+            $table->foreign('users_id','fk_jadwalkp_to_user')->references('id')
+            ->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -30,6 +35,9 @@ class Jadwalkps extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwalkp');
+        Schema::dropIfExists('jadwal_kps');
+        Schema::table('jadwal_kps', function (Blueprint $table) {
+            $table->dropForeign('fk_video_to_user');
+        });
     }
 }

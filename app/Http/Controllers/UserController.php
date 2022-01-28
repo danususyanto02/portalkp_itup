@@ -10,6 +10,8 @@ use App\Models\PejabatProdi;
 use App\Models\Role;
 use App\Models\StafProdi;
 use App\Models\User;
+use Facade\Ignition\QueryRecorder\Query;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -73,6 +75,16 @@ class UserController extends Controller
 
 
     public function store(Request $request){
+ 
+        $request->validate([
+            'nomor_induk' => 'required|unique:users',
+            [
+                'nomor_induk.unique'=>'User Dengan Nomor Induk ini Sudah Terdaftar. 
+                <a href="'.route('super_admin.user.create').'?nomor_induk='.$request->nomor_induk.'"></a>'
+            ]
+        ]);
+
+    
         $user = new User;
         $user -> nomor_induk = $request->nomor_induk;
         $user -> role_id = $request->role_id;
@@ -111,8 +123,10 @@ class UserController extends Controller
                 'nama' => $request -> input ('nama'),
                 'jenis_kelamin' => $request -> input ('jenis_kelamin'),
             ]);
+            User::create($request->validate());
             $mahasiswa->save();
             }else(url('admin/user') );
+      
 
         $user = User::orderBy('role_id','DESC')->get();
         return view('dashboardbackend.user.indexuser',compact('user'));

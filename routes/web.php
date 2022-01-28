@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BeritakpController;
-use App\Http\Controllers\BeritaprodiController;
 use App\Http\Controllers\dashboard\ProfileDosenController;
 use App\Http\Controllers\dashboard\ProfileMahasiswaController;
 use App\Http\Controllers\dashboard\ProfilePejabatprodiController;
